@@ -1,6 +1,7 @@
-Here's a sample code assignment for a Python AI developer that involves training a machine learning model on a dataset and obtaining results:
 
-Task: Build a binary classification model to predict whether a customer will churn (i.e., discontinue their subscription) or not based on various features in the dataset. You are given a dataset containing customer information and whether they churned or not in the past. Your task is to use this dataset to train a machine learning model and evaluate its performance on a test set.
+# Python Developer AI  Task
+
+Build a binary classification model to predict whether a customer will churn (i.e., discontinue their subscription) or not based on various features in the dataset. You are given a dataset containing customer information and whether they churned or not in the past. Your task is to use this dataset to train a machine learning model and evaluate its performance on a test set.
 
 Dataset: You can use the Telco Customer Churn dataset, which is available on Kaggle at https://www.kaggle.com/blastchar/telco-customer-churn.
 
@@ -11,13 +12,13 @@ Dataset: You can use the Telco Customer Churn dataset, which is available on Kag
 - [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development)
 - Clean git commits that shows your work progress.
 
-Deliverables:
+## Deliverables:
 
 1. Python script that reads in the dataset, preprocesses it, trains a model, and evaluates its performance on a test set.
 2. A report explaining your approach, including details on data preprocessing, feature selection/engineering, choice of algorithm, hyperparameter tuning, and evaluation metrics.
 3. A visual representation of your model's performance (e.g., ROC curve, confusion matrix).
 
-Requirements:
+## Requirements:
 
 Use Python 3.x.
 1. Use scikit-learn for the machine learning tasks.
