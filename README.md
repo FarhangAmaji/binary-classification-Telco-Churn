@@ -17,6 +17,7 @@ Dataset: You can use the Telco Customer Churn dataset, which is available on Kag
 1. Python script that reads in the dataset, preprocesses it, trains a model, and evaluates its performance on a test set.
 2. A report explaining your approach, including details on data preprocessing, feature selection/engineering, choice of algorithm, hyperparameter tuning, and evaluation metrics.
 3. A visual representation of your model's performance (e.g., ROC curve, confusion matrix).
+4. Please clone this repository in a new github repository in private mode and share with ID: `mason-chase` in private mode on github.com, make sure you do not erase my commits and then create a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) (code review).
 
 ## Requirements:
 
@@ -25,3 +26,4 @@ Use Python 3.x.
 2. Your code should be well-documented and follow best practices for software engineering.
 3. Your report should be clear and concise, with appropriate visualizations to support your claims.
 4. Your model should achieve an accuracy of at least 75% on the test set.
+
