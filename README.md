@@ -8,7 +8,9 @@ Objective: Develop an AI-driven Python application to extract and process key in
 - [TDD](https://en.wikipedia.org/wiki/Test-driven_development)
 - [DDD](https://en.wikipedia.org/wiki/Domain-driven_design)
 - [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development)
-- Clean git commits that shows your work progress.
+- Clean Architecture
+- Clean Code
+- Clean GIT commits that shows your work progress
 
 ## Deliverables:
 
