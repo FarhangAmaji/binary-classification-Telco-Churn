@@ -1,16 +1,17 @@
 
 # Python Developer AI  Task
 
-Objective: Develop an AI-driven Python application to extract and process key information from a diverse dataset of invoices and receipts.
+Build a binary classification model to predict whether a customer will churn (i.e., discontinue their subscription) or not based on various features in the dataset. You are given a dataset containing customer information and whether they churned or not in the past. Your task is to use this dataset to train a machine learning model and evaluate its performance on a test set.
+
+Dataset: You can use the Telco Customer Churn dataset, which is available on Kaggle at https://www.kaggle.com/blastchar/telco-customer-churn.
 
 ## Practices and patterns (Must):
 
-- [TDD](https://en.wikipedia.org/wiki/Test-driven_development)
-- [DDD](https://en.wikipedia.org/wiki/Domain-driven_design)
-- [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development)
+- [TDD](https://en.wikipedia.org/wiki/Test-driven_development): A) Processes Data Clean Up B) Train C) Performance Test
+- [DDD](https://en.wikipedia.org/wiki/Domain-driven_design): Adjust Relevant Domain
 - Clean Architecture
 - Clean Code
-- Clean GIT commits that shows your work progress
+- Clean git commits that shows your work progress.
 
 ## Deliverables:
 
@@ -27,34 +28,10 @@ Use Python 3.x.
 3. Your report should be clear and concise, with appropriate visualizations to support your claims.
 4. Your model should achieve an accuracy of at least 75% on the test set.
 
-## Description:
-
-In this challenge, you are tasked with creating a Python-based solution that can accurately extract key data points from a dataset of 50 invoices and receipts originating from various countries. Your solution should be able to identify and process the following key-value pairs:
-
-a. Invoice Date
-b. Invoice Amount
-c. Tax Amount
-d. Array of Invoice Line Items (including Description, Amount, and Quantity)
-e. Issuing Company Name
-
-Instructions:
-
-Dataset Preparation: Create a dataset comprising 50 invoices and receipts from a variety of countries. Ensure that the dataset is diverse and includes different formats, languages, and currencies to effectively evaluate the performance of your AI model.
-
-Text Extraction and Key-Value Recognition: Develop an AI model using Python that can extract text from the dataset and accurately identify the key information based on the specified key-value pairs. Consider using Optical Character Recognition (OCR) or other relevant techniques to achieve the desired accuracy.
-
-Model Evaluation: Assess the performance of your AI model, considering factors such as precision, recall, and F1 score. Document any limitations or challenges you faced during the development process and propose potential improvements for future iterations.
-
-Documentation: Provide clear and concise documentation, detailing the steps and processes involved in creating the dataset and developing the AI model. Include any necessary instructions for setting up, training, and testing the model.
-
-Code Submission: Submit your code in a well-structured format, following best practices for coding conventions, commenting, and version control. The code should be easily understandable and maintainable by other developers.
-
-Note: To ensure a fair evaluation, please refrain from using pre-trained models or third-party APIs for the text extraction and key-value recognition tasks. Your solution should be based on your own work and expertise.
-
 
 ## Test Driven
 
-Example below is explaining how to deliver a TDD code base for your result
+Please improve below test model with clean architecture
 
 ```python
 import pandas as pd
@@ -102,3 +79,4 @@ class TestModel(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 ```
+
