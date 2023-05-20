@@ -71,8 +71,42 @@ telcoChurnWithCategoricalCols=trueFalseColsTo1_0(telcoChurnWithCategoricalCols)
 #%% put the telcoChurn cols back together
 telcoChurn=pd.concat([telcoChurnNonCategoricalCols, telcoChurnWithCategoricalCols], axis=1)
 telcoChurn = telcoChurn.dropna()
-#%% 
-
+del telcoChurnWithCategoricalCols,telcoChurnNonCategoricalCols,categoricalCols2unique,categoricalCols
+#%% describe numericCols
+numericCols=[col for col in telcoChurn.columns if telcoChurn[col].nunique() > 2]
+print('numericCols description:',telcoChurn[numericCols].describe())
+#%% plot boxplots for outliers
+'#ccc boxplots show the quartiles; dots shown in plots are outliers but they differ from outliers that we detect'
+import matplotlib.pyplot as plt
+import seaborn as sns
+for nc in numericCols:
+    sns.boxplot(x ='Churn', y = nc, data = telcoChurn)
+    plt.title(nc)
+    plt.show()
+#%% outliers Checker with Inter Quartile Range (IQR)
+#kkk I may add test driven to check these steps
+from collections import Counter
+outlierList = []
+criticalOutlierColsForARow=1
+for column in numericCols:
+    # 1st quartile (25%)
+    Q1 = np.percentile(telcoChurn[column], 25)
+    # 3rd quartile (75%)
+    Q3 = np.percentile(telcoChurn[column],75)
+    # Interquartile range (IQR)
+    IQR = Q3 - Q1
+    # outlier step
+    outlierStep = 1.5 * IQR
+    # Determining a list of indices of outliers
+    outlierListColumn = telcoChurn[(telcoChurn[column] < Q1 - outlierStep) | (telcoChurn[column] > Q3 + outlierStep )].index
+    # appending the list of outliers 
+    outlierList.extend(outlierListColumn)
+    
+# selecting observations containing more than x outliers
+outlierList = Counter(outlierList)
+multipleOutliers = list( k for k, v in outlierList.items() if v > criticalOutlierColsForARow )#ccc if only the row has more than n outliers would be detected as outLier
+telcoChurn=telcoChurn.drop(multipleOutliers).reset_index(drop=True)
+'this dataset didnt have outliers if it had we had shown the boxplots once more'
 #%% 
 
 #%% 

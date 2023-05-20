@@ -1,1 +1,10 @@
-#kkk find pip name of numpy,pandas,sklearn, xgboost, lgbm, seaborn, matplotlib
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+xgboost
+imblearn
+lightgbm
+# category-encoders
+# plotly

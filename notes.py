@@ -12,9 +12,11 @@ steps to do:
             #done Dropping duplicated
             #done drop missing values
             #done change categorical to multiple cols
+            #done handle outliers;plot before and after plot for numerical cols outlier
+            show input data imbalances
             'optional default to do oversampling' for imbalances
-            handle outliers;plot before and after plot for numerical cols outlier
             add comment 'for other imbalances and outlier options'
+            think about other methods may needed
         
         EDA(exploratory data analysis):
             #ccc not a necessity, I have more important things to do
