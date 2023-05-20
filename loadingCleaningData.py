@@ -22,6 +22,7 @@ telcoChurn['TotalCharges'] = telcoChurn['TotalCharges'].astype(float)
 telcoChurn = telcoChurn.dropna()
 #%% removing duplicates
 telcoChurn = telcoChurn.drop_duplicates()
+#%% sec: handle categorical cols
 #%% change True/False cols to 1/0
 def trueFalseColsTo1_0(df):
     for col in df.columns:
@@ -72,11 +73,12 @@ telcoChurnWithCategoricalCols=trueFalseColsTo1_0(telcoChurnWithCategoricalCols)
 telcoChurn=pd.concat([telcoChurnNonCategoricalCols, telcoChurnWithCategoricalCols], axis=1)
 telcoChurn = telcoChurn.dropna()
 del telcoChurnWithCategoricalCols,telcoChurnNonCategoricalCols,categoricalCols2unique,categoricalCols
+#%% sec: outliers
 #%% describe numericCols
 numericCols=[col for col in telcoChurn.columns if telcoChurn[col].nunique() > 2]
 print('numericCols description:',telcoChurn[numericCols].describe())
 #%% plot boxplots for outliers
-'#ccc boxplots show the quartiles; dots shown in plots are outliers but they differ from outliers that we detect'
+'boxplots show the quartiles; dots shown in plots are outliers but they differ from outliers that we detect'
 import matplotlib.pyplot as plt
 import seaborn as sns
 for nc in numericCols:
@@ -107,12 +109,30 @@ outlierList = Counter(outlierList)
 multipleOutliers = list( k for k, v in outlierList.items() if v > criticalOutlierColsForARow )#ccc if only the row has more than n outliers would be detected as outLier
 telcoChurn=telcoChurn.drop(multipleOutliers).reset_index(drop=True)
 'this dataset didnt have outliers if it had we had shown the boxplots once more'
-#%% 
-
-#%% 
-
-#%% 
-
+#%% sec: train_test_split
+from sklearn.model_selection import train_test_split
+xData = telcoChurn.drop('Churn',axis=1).values
+yData = telcoChurn.Churn.values
+# spliting the data into test and train
+xTrain, xTest , yTrain, yTest = train_test_split(xData, yData , test_size=0.2, random_state=0)
+#%% sec: imbalance
+sns.countplot(x = 'Churn', data = telcoChurn)
+plt.show()
+'we see the no churn has more data than customers who churn'
+print('no churn ratio:',len(telcoChurn[telcoChurn['Churn']==0])/len(telcoChurn))
+"so on this data with just predicting 'no' we would get 73.5% correct answers!!"
+#%% upsampling
+from imblearn.over_sampling import SMOTE
+doUpSampling=False
+if doUpSampling:
+    print('Before upsampling count of label 0 {}'.format(sum(yTrain==0)))
+    print('Before upsampling count of label 1 {}'.format(sum(yTrain==1)))
+    # Minority Over Sampling Technique
+    sm = SMOTE(sampling_strategy = 1, random_state=1)
+    xTrainSampled, yTrainSampled= sm.fit_resample(xTrain, yTrain.ravel())
+                                             
+    print('After upsampling count of label 0 {}'.format(sum(yTrainSampled==0)))
+    print('After upsampling count of label 1 {}'.format(sum(yTrainSampled==1)))
 #%% 
 
 #%% 
