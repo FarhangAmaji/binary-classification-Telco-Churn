@@ -15,7 +15,7 @@ steps to do:
             #done handle outliers;plot before and after plot for numerical cols outlier
             #done show input data imbalances
             #done 'optional default not to do oversampling' for imbalances
-            # add comment 'for other imbalances and outlier options'
+            #notNow add comment 'for other imbalances and outlier options'
             think about other methods may needed
             
         
@@ -23,7 +23,9 @@ steps to do:
             #ccc not a necessity, I have more important things to do
             'Correlation Analysis' and 'Heatmap'(maybe useful, I may do it after all steps)
         
-        do first model with 5fold Cross-validation and Hyperparameter Tuning:
+        do first model:
+            #done Hyperparameter Tuning
+            #done 5fold Cross-validation
             #kkk add subSteps later
         
         explain output data:
