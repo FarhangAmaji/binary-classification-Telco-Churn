@@ -22,6 +22,55 @@ telcoChurn['TotalCharges'] = telcoChurn['TotalCharges'].astype(float)
 telcoChurn = telcoChurn.dropna()
 #%% removing duplicates
 telcoChurn = telcoChurn.drop_duplicates()
+#%% change True/False cols to 1/0
+def trueFalseColsTo1_0(df):
+    for col in df.columns:
+        if df[col].dtype == bool:  # Check if the column is boolean
+            df[col] = df[col].astype(int)  # Convert boolean to int
+        else:
+            unique_values = df[col].unique()
+            if len(unique_values) == 2 and set(unique_values) == {True, False}:
+                df[col] = df[col].astype(bool).astype(int)
+    return df
+telcoChurn=trueFalseColsTo1_0(telcoChurn)
+#%% change yes/no cols to 1/0
+def yesNoColsTo1_0(df):
+    for col in df.columns:
+        if df[col].dtype == object:  # Check if the column is of object type (string)
+            unique_values = df[col].str.lower().str.strip().unique()
+            if set(unique_values) == {'yes', 'no'}:
+                df[col] = df[col].str.lower().str.strip().map({'yes': 1, 'no': 0})
+    return df
+telcoChurn=yesNoColsTo1_0(telcoChurn)
+#%% handle categorical cols 
+'''
+#ccc
+not considering the numerical cols we have categorical columns
+they have some options like gender('male','female') or some of them have more than 2 options
+for 2 option categorical cols like gender we do 'gender_female' and for females we put 1 and for males we do 0
+for more than 2 option categorical cols like 'PaymentMethod' which has options of 'Bank transfer (automatic)','Credit card (automatic)','Electronic check' and 'Mailed check' we 'PaymentMethod_Bank transfer (automatic)','PaymentMethod_Credit card (automatic)','PaymentMethod_Electronic check' and 'PaymentMethod_Mailed check'. so for i.e. if the option in 'PaymentMethod' is 'Electronic check' we put 1 for that row and for other new columns we put 0
+'''
+#%% find categorical cols 
+categoricalCols=telcoChurn.select_dtypes(exclude=['number']).columns
+# Find categorical columns with 2 unique values
+categoricalCols2unique = [col for col in categoricalCols if telcoChurn[col].nunique() == 2]
+
+telcoChurnWithCategoricalCols=telcoChurn.loc[:, categoricalCols]
+telcoChurnWithCategoricalCols=pd.get_dummies(telcoChurnWithCategoricalCols)
+
+telcoChurnNonCategoricalCols=telcoChurn.loc[:,list(set(telcoChurn.columns) - set(categoricalCols))]
+#%%
+"#ccc here we remove 'gender_Male' from 'telcoChurnWithCategoricalCols' because gender has only 2 categories"
+def delete2ndOptionFor_CategoricalCols2unique_From_telcoChurnWithCategoricalCols(categoricalCols2unique,mainDf,dfWithCategoricalCols):
+    for cc2u in categoricalCols2unique:
+        _2ndOption=mainDf[cc2u].unique()[1]
+        dfWithCategoricalCols = dfWithCategoricalCols.drop(f'{cc2u}_{_2ndOption}', axis=1)
+    return dfWithCategoricalCols
+telcoChurnWithCategoricalCols=delete2ndOptionFor_CategoricalCols2unique_From_telcoChurnWithCategoricalCols(categoricalCols2unique,telcoChurn,telcoChurnWithCategoricalCols)
+telcoChurnWithCategoricalCols=trueFalseColsTo1_0(telcoChurnWithCategoricalCols)
+#%% put the telcoChurn cols back together
+telcoChurn=pd.concat([telcoChurnNonCategoricalCols, telcoChurnWithCategoricalCols], axis=1)
+telcoChurn = telcoChurn.dropna()
 #%% 
 
 #%% 

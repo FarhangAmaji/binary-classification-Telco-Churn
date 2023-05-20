@@ -8,10 +8,10 @@ the done steps would have #done before them
 steps to do:
     machine learning approaches:
         do data cleaning:
-            add 'tenure' meaning
-            Dropping duplicated
-            drop missing values
-            change categorical to multiple cols
+            #done add 'tenure' meaning
+            #done Dropping duplicated
+            #done drop missing values
+            #done change categorical to multiple cols
             'optional default to do oversampling' for imbalances
             handle outliers;plot before and after plot for numerical cols outlier
             add comment 'for other imbalances and outlier options'
@@ -24,7 +24,7 @@ steps to do:
             #kkk add subSteps later
         
         explain output data:
-            with confusion matrices,roc and auc plots, accuracy,reacll, f1score,Cohen kappa score,... or top features affecting the model    
+            with confusion matrices,roc and auc plots, accuracy,recall, f1score,Cohen kappa score,... or top features affecting the model    
             add explaination on 'what metrics better to be chosen'
         
         add 2nd model:
