@@ -40,7 +40,7 @@ from sklearn.svm import NuSVC #kkk took so long check it later
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.multiclass import OutputCodeClassifier
-# from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.linear_model import PassiveAggressiveClassifier
 # from sklearn.linear_model import Perceptron
 # from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 # from sklearn.neighbors import RadiusNeighborsClassifier
@@ -284,6 +284,16 @@ allModels = [
 #     modelEvaluator('OutputCodeClassifier', OutputCodeClassifier, {
 #     'estimator': [RandomForestClassifier()],
 #     'code_size': [0.5, 1.0, 1.5],  # Example values for the 'code_size' hyperparameter
+# }, defaultCrossValidationNum),
+    
+    # PassiveAggressiveClassifier
+    # modelEvaluator('PassiveAggressiveClassifier', PassiveAggressiveClassifier, {
+#     'C': [0.1, 1.0, 10.0],  # Regularization parameter
+#     'fit_intercept': [True, False],  # Whether to include an intercept term
+#     'max_iter': [1000, 2000, 3000],  # Maximum number of iterations
+#     'tol': [1e-3, 1e-4, 1e-5],  # Tolerance for stopping criterion
+#     'loss': ['hinge', 'squared_hinge'],  # Loss function ('hinge' or 'squared_hinge')
+#     'random_state': [42]  # Random state for reproducibility
 # }, defaultCrossValidationNum),
     
     # 
