@@ -26,7 +26,7 @@ from sklearn.gaussian_process import GaussianProcessClassifier #kkk took so long
 from sklearn.gaussian_process.kernels import RBF, Matern, DotProduct #kkk this is for GaussianProcessClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import HistGradientBoostingClassifier
-# from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier
 # from sklearn.semi_supervised import LabelPropagation
 # from sklearn.semi_supervised import LabelSpreading
 # from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
@@ -180,6 +180,16 @@ allModels = [
 #     'l2_regularization': [0.0, 0.1, 0.01],
 #     'early_stopping': [True, 'auto'],
 #     'random_state': [None, 42]
+# }, defaultCrossValidationNum),
+
+    # KNeighborsClassifier
+    # modelEvaluator('KNeighborsClassifier', KNeighborsClassifier, {
+#     'n_neighbors': [3, 5, 10],
+#     'weights': ['uniform', 'distance'],
+#     'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
+#     'leaf_size': [30, 50, 100],
+#     'p': [1, 2],
+#     'metric': ['euclidean', 'manhattan'],
 # }, defaultCrossValidationNum),
 
     # 
