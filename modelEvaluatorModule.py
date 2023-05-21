@@ -9,6 +9,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score,cohen_kappa_score
 from sklearn.model_selection import StratifiedKFold
 from utils import q,ti
+#kkk add option no to use cross validation
 #%%
 class trainTestXY:
     def __init__(self, xTrain, xTest, yTrain, yTest):
