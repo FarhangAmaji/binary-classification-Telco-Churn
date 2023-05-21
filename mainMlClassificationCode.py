@@ -388,13 +388,10 @@ else:
     totResultsDf = pd.DataFrame()
 if __name__ == '__main__':
     for m1 in allModels:
-        try:#kkk delete later
-            print(m1.name,'started',ti()-t0,'s')
-            totResultsDf = pd.concat([totResultsDf, m1.fitModelAndGetResults(trainTestXY_,parallel=True)])
-            totResultsDf.to_csv(f'{csvFileName}.csv', index=False, header=True)
-            print(m1.name,'finished',ti()-t0,'s')
-        except Exception as e:
-            print('Errrrrr:',e)
+        print(m1.name,'started',ti()-t0,'s')
+        totResultsDf = pd.concat([totResultsDf, m1.fitModelAndGetResults(trainTestXY_,totResultsDf,parallel=True)])
+        totResultsDf.to_csv(f'{csvFileName}.csv', index=False, header=True)
+        print(m1.name,'finished',ti()-t0,'s')
     print('lasted',ti()-t0,'s')
 #%% 
 

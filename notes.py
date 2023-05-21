@@ -30,6 +30,8 @@ steps to do:
             #done handle without hyperparam modelEvaluation
             separate the modelEval for a single model and (xFold data) now its named processFold but rename it and make it better
             add an option if the params are in some fileSaved dont do the function
+            add option for not using cross validation
+            check if some model has lots of errors
             add confusion matrices
             add drawing of AUC-ROC Curve
             add scaler
