@@ -39,15 +39,6 @@ steps to do:
             with confusion matrices,roc and auc plots, accuracy,recall, f1score,Cohen kappa score,... or top features affecting the model    
             add explaination on 'what metrics better to be chosen'
         
-        add 2nd model:
-            try to make a system to do it in a func with 5fold Cross-validation and Hyperparameter Tuning
-        
-        rest of models:
-            find Hyperparameters
-            test if they fit to general func to do model and explain output results
-            dont forget to do a commit after adding each model
-            add the libraries needed to requirements.txt
-        
         apply clean Architecture and code principles and TDD and DDD as possible:
             #kkk add subSteps later as needed
         

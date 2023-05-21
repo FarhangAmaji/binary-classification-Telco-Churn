@@ -1,0 +1,256 @@
+processFold 0 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705295.1588538 
+processFold 1 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705295.1598532 
+processFold 2 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705295.1598532 
+processFold 3 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705295.1608548 
+processFold 4 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705295.1608548 
+processFold 0 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705295.1618564 
+processFold 1 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705295.1628609 
+processFold 2 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705295.1648533 
+processFold 3 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705301.6867788 
+processFold 4 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705302.3997793 
+processFold 0 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 450} 1684705302.4407842 
+processFold 1 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 450} 1684705302.575779 
+processFold 2 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 450} 1684705302.5877798 
+processFold 3 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 450} 1684705302.7347815 
+processFold 4 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 450} 1684705303.3567803 
+processFold 0 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 500} 1684705303.5347798 
+processFold 1 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 500} 1684705309.1087804 
+processFold 2 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 500} 1684705309.7787838 
+processFold 3 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 500} 1684705310.4437802 
+processFold 4 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 500} 1684705310.610782 
+processFold 0 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705310.6157835 
+processFold 1 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705310.7697792 
+processFold 2 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705311.33635 
+processFold 3 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705312.5083504 
+processFold 4 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705316.7693453 
+processFold 0 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705317.5353463 
+processFold 1 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705318.2563498 
+processFold 2 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705318.4283488 
+processFold 3 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705318.9433467 
+processFold 4 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705319.1973486 
+processFold 0 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 450} 1684705319.238348 
+processFold 1 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 450} 1684705320.0663497 
+processFold 2 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 450} 1684705323.1013453 
+processFold 3 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 450} 1684705324.573706 
+processFold 4 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 450} 1684705326.1652951 
+processFold 0 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 500} 1684705326.4473305 
+processFold 1 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 500} 1684705326.8357656 
+processFold 2 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 500} 1684705326.9297652 
+processFold 3 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 500} 1684705327.037772 
+processFold 4 xgboost {'learning_rate': 0.01, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 500} 1684705327.683635 
+processFold 0 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705330.2767859 
+processFold 1 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705331.9007852 
+processFold 2 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705334.160345 
+processFold 3 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705335.6513903 
+processFold 4 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705335.8063946 
+processFold 0 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705336.3733892 
+processFold 1 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705336.6363902 
+processFold 2 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705336.8793933 
+processFold 3 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705337.3243916 
+processFold 4 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705339.0763896 
+processFold 0 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 450} 1684705342.3963885 
+processFold 1 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 450} 1684705343.8183901 
+processFold 2 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 450} 1684705343.91639 
+processFold 3 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 450} 1684705345.032391 
+processFold 4 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 450} 1684705345.2323892 
+processFold 0 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 500} 1684705345.4183896 
+processFold 1 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 500} 1684705345.6473892 
+processFold 2 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 500} 1684705347.023396 
+processFold 3 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 500} 1684705350.9333916 
+processFold 4 xgboost {'learning_rate': 0.02, 'subsample': 0.8, 'colsample_bytree': 1, 'n_estimators': 500} 1684705352.1933901 
+processFold 0 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705352.3833923 
+processFold 1 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705352.549389 
+processFold 2 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705353.5083904 
+processFold 3 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705354.8930733 
+processFold 4 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684705354.9680738 
+processFold 0 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705355.166074 
+processFold 1 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705360.323076 
+processFold 2 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705360.966646 
+processFold 3 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705361.0839477 
+processFold 4 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 0.8, 'n_estimators': 500} 1684705362.1089485 
+processFold 0 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 450} 1684705362.3509493 
+processFold 1 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 450} 1684705363.3589237 
+processFold 2 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 450} 1684705363.457254 
+processFold 3 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 450} 1684705363.6252553 
+processFold 4 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 450} 1684705367.4651377 
+processFold 0 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 500} 1684705368.9314954 
+processFold 1 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 500} 1684705369.1418076 
+processFold 2 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 500} 1684705369.8144362 
+processFold 3 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 500} 1684705370.0044374 
+processFold 4 xgboost {'learning_rate': 0.02, 'subsample': 1, 'colsample_bytree': 1, 'n_estimators': 500} 1684705370.6184351 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705377.049845 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705377.049845 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705377.049845 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705377.049845 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705377.0547163 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705377.0547163 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705377.0547163 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705377.0547163 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705378.209189 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705378.209189 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705378.209189 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705378.209189 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705378.209189 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705378.2141848 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705378.4840608 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705378.9511712 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705379.261827 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705379.2648318 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705379.2648318 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705379.2668283 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705379.5211186 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705379.7399702 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705380.1649702 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705380.2567773 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705380.361777 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705380.3667781 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705380.3667781 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705380.4317777 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705380.8044682 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705380.8094718 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705381.2699127 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705381.3249187 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705381.4761157 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705381.4761157 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705381.4861164 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705381.9179482 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705381.9679494 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705382.2357554 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705382.4407556 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705382.6242046 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705382.6292055 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705382.6292055 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705383.083981 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705383.136526 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705383.4109902 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705383.5476148 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705383.646199 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705383.828395 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705383.8784082 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705384.3214903 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705384.3694744 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705384.374475 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705384.652027 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705385.0006082 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705385.2335727 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705385.2810178 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705385.316837 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705385.8765347 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705385.9145377 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705386.2344775 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705386.5859945 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705386.6576817 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705386.877692 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705386.9276917 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705387.4776943 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705387.5126808 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705387.522693 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705387.868697 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705388.277896 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705388.502894 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705388.5929065 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705389.112893 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705389.1428928 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705389.1928928 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705389.527893 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705389.9378932 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705390.0028925 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705390.2129061 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705390.6614175 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705390.8564184 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705390.8614147 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705390.941417 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705391.2664154 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705391.7602031 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705391.9751928 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705392.5025055 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705392.6227999 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705392.770232 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705392.8302317 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705393.1909142 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705393.7272184 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705393.7859025 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705394.0882494 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705394.7329943 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705394.8629935 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705394.9429963 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705395.2929935 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705395.8379822 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705396.1079938 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705396.2229934 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705396.7129834 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705396.7229939 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705396.8579953 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705397.2479937 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705397.422981 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705397.7829947 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705398.1029422 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705398.1829379 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705398.7316818 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705398.8316805 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705399.20668 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705399.4166684 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705400.1466677 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705400.1866705 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705400.3816674 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705400.4466684 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705400.7566822 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705400.9266803 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705401.5466695 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705402.03167 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705402.291681 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705402.3516693 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705402.5866818 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705402.9900136 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705403.1550274 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705403.5850163 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705403.8400261 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705404.355017 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705404.6950266 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705405.0219877 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705405.4518204 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705405.6773567 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705406.3606102 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705406.7763472 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': None, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705406.947379 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705407.0223668 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705407.3189898 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705407.5861306 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705408.2786188 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'auto'} 1684705408.9675314 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705409.4404488 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705409.5544906 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705409.718936 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705409.783922 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt'} 1684705409.80394 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705410.4995492 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705410.5045395 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705411.230183 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705411.825622 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'} 1684705412.0363636 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705412.1293643 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705412.201296 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705412.818719 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705413.5856097 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'auto'} 1684705414.220957 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705414.2902377 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705414.4603586 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705414.47537 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705414.551377 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684705415.1057239 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705415.8407228 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705416.0407104 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705416.4657104 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705416.6907232 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2'} 1684705416.7207098 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705416.7807121 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705417.4116383 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705418.4339044 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705418.8053868 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'auto'} 1684705419.1203861 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705419.1724548 
+processFold 1 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705419.5720608 
+processFold 2 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705419.7500303 
+processFold 3 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705420.364035 
+processFold 4 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt'} 1684705420.476021 
+processFold 0 RandomForestClassifier {'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'log2'} 1684705420.7913115 
