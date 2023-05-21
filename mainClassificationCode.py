@@ -13,6 +13,10 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import BaggingClassifier
 from sklearn.naive_bayes import BernoulliNB
+from sklearn.calibration import CalibratedClassifierCV #kkk gave error
+# from sklearn.naive_bayes import CategoricalNB #kkk gave error
+from sklearn.multioutput import ClassifierChain  #kkk gave lots of error
+from sklearn.linear_model import LogisticRegression
 #%% 
 telcoChurn, xTrain, xTest, yTrain, yTest = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
 #%%
@@ -69,11 +73,21 @@ allModels = [
     
     
     # BernoulliNB
-    modelEvaluator('BernoulliNB', BernoulliNB,  {
-    'alpha': [0.0, 0.5, 1.0, 2.0]}, defaultCrossValidationNum),
+    # modelEvaluator('BernoulliNB', BernoulliNB,  {
+    # 'alpha': [0.0, 0.5, 1.0, 2.0]}, defaultCrossValidationNum),
+
+    # LogisticRegression
+    modelEvaluator('LogisticRegression', LogisticRegression, {
+    'penalty': ['l1', 'l2'],
+    'C': [0.001, 0.01, 0.1, 1, 10],
+    'solver': ['liblinear', 'saga'],
+    'max_iter': [100, 1000],
+    'class_weight': [None, 'balanced']
+}, defaultCrossValidationNum),
 
 
-    # modelEvaluator(name, modelFunc, hyperParamRanges, defaultCrossValidationNum),
+    # 
+    # modelEvaluator('name', modelFunc, hyperParamRanges, defaultCrossValidationNum),
 ]
 
 #kkk add scaler
