@@ -20,6 +20,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import ComplementNB
 from sklearn.dummy import DummyClassifier
 from sklearn.tree import ExtraTreeClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.naive_bayes import GaussianNB
 #%% 
 telcoChurn, xTrain, xTest, yTrain, yTest = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
 #%%
@@ -102,14 +104,40 @@ allModels = [
 # }, defaultCrossValidationNum),
 
     # ExtraTreeClassifier
-    modelEvaluator('ExtraTreeClassifier', ExtraTreeClassifier, {
-    'criterion': ['gini', 'entropy'],
-    'max_depth': [None, 5, 10],
-    'min_samples_split': [2, 5, 10],
-    'min_samples_leaf': [1, 2, 4],
-    'max_features': ['auto', 'sqrt', 'log2'],
-    'random_state': [None, 42]
+#     modelEvaluator('ExtraTreeClassifier', ExtraTreeClassifier, {
+#     'criterion': ['gini', 'entropy'],
+#     'max_depth': [None, 5, 10],
+#     'min_samples_split': [2, 5, 10],
+#     'min_samples_leaf': [1, 2, 4],
+#     'max_features': ['auto', 'sqrt', 'log2'],
+#     'random_state': [None, 42]
+# }, defaultCrossValidationNum),
+
+    # ExtraTreesClassifier
+    modelEvaluator('ExtraTreesClassifier', ExtraTreesClassifier, {
+    'n_estimators': [100],
+    'criterion': ['entropy'],
+    'max_depth': [None, 5],
+    'min_samples_split': [2, 5],
+    'min_samples_leaf': [1],
+    'max_features': ['auto'],
+    'bootstrap': [False],
+    'random_state': [None]
 }, defaultCrossValidationNum),
+    # ExtraTreesClassifier
+#     modelEvaluator('ExtraTreesClassifier', ExtraTreesClassifier, {
+#     'n_estimators': [100, 200, 300],
+#     'criterion': ['gini', 'entropy'],
+#     'max_depth': [None, 5, 10],
+#     'min_samples_split': [2, 5, 10],
+#     'min_samples_leaf': [1, 2, 4],
+#     'max_features': ['auto', 'sqrt', 'log2'],
+#     'bootstrap': [True, False],
+#     'random_state': [None, 42]
+# }, defaultCrossValidationNum),
+
+    # GaussianNB
+    modelEvaluator('GaussianNB', GaussianNB, {}, defaultCrossValidationNum),
 
     # 
     # modelEvaluator('name', modelFunc, hyperParamRanges, defaultCrossValidationNum),
