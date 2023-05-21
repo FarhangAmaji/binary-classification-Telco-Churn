@@ -30,7 +30,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.semi_supervised import LabelPropagation
 from sklearn.semi_supervised import LabelSpreading
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-# from sklearn.svm import LinearSVC
+from sklearn.svm import LinearSVC
 # from sklearn.linear_model import LogisticRegressionCV
 # from sklearn.neural_network import MLPClassifier
 # from sklearn.multioutput import MultiOutputClassifier
@@ -218,6 +218,20 @@ allModels = [
 #     'priors': [None, [0.1, 0.9], [0.3, 0.7]],
 #     'n_components': [None, 1, 2],
 #     'tol': [1e-4, 1e-5],
+# }, defaultCrossValidationNum),
+    
+    # LinearSVC
+    # modelEvaluator('LinearSVC', LinearSVC, {
+#     'penalty': ['l2'],
+#     'loss': ['hinge', 'squared_hinge'],
+#     'dual': [True, False],
+#     'tol': [1e-4, 1e-5],
+#     'C': [1.0, 0.1, 0.01],
+#     'multi_class': ['ovr', 'crammer_singer'],
+#     'fit_intercept': [True, False],
+#     'intercept_scaling': [1, 2, 5],
+#     'class_weight': [None, 'balanced'],
+#     'max_iter': [1000, 2000],
 # }, defaultCrossValidationNum),
     
     # 
