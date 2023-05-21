@@ -39,16 +39,8 @@ allModels = [
     # 'max_features': ['auto', 'sqrt', 'log2']}, defaultCrossValidationNum),
     
     
-    # DecisionTreeClassifier
-    modelEvaluator('DecisionTreeClassifier', DecisionTreeClassifier, {
-    'criterion': ['gini'],
-    'max_depth': [5],
-    'min_samples_split': [2],
-    'min_samples_leaf': [1],
-    'max_features': ['auto', 'sqrt']
-}, defaultCrossValidationNum),
 #     # DecisionTreeClassifier
-#     # modelEvaluator('DecisionTreeClassifier', DecisionTreeClassifier, {
+#     modelEvaluator('DecisionTreeClassifier', DecisionTreeClassifier, {
 #     'criterion': ['gini', 'entropy'],
 #     'max_depth': [None, 5, 10, 20],
 #     'min_samples_split': [2, 5, 10],
@@ -57,7 +49,14 @@ allModels = [
 # }, defaultCrossValidationNum),
     
     #AdaBoostClassifier
-    # modelEvaluator('AdaBoostClassifier', AdaBoostClassifier, hyperparameters = {
+    modelEvaluator('AdaBoostClassifier', AdaBoostClassifier, {
+    'base_estimator': [DecisionTreeClassifier(max_depth=1)],
+    'n_estimators': [50],
+    'learning_rate': [0.1, 0.5],
+    'algorithm': ['SAMME', 'SAMME.R']}, defaultCrossValidationNum),
+    
+    #AdaBoostClassifier
+    # modelEvaluator('AdaBoostClassifier', AdaBoostClassifier,  {
 #     'base_estimator': [DecisionTreeClassifier(max_depth=1), DecisionTreeClassifier(max_depth=2)],
 #     'n_estimators': [50, 100, 200, 500],
 #     'learning_rate': [0.1, 0.5, 1.0],
