@@ -10,6 +10,8 @@ import pandas as pd
 import itertools
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import confusion_matrix, recall_score, precision_score, f1_score, accuracy_score, roc_auc_score
+from joblib import Parallel, delayed
+import multiprocessing
 #%% 
 class trainTestXY:
     def __init__(self, xTrain, xTest , yTrain, yTest):
@@ -31,7 +33,7 @@ class predictedY:
         return scores
         
 class ModelInfo:
-    def __init__(self, name, modelFunc, hyperParamRanges,crossValidationNum):
+    def __init__(self, name, modelFunc, hyperParamRanges, crossValidationNum):
         self.name = name
         self.modelFunc = modelFunc
         self.hyperParamRanges = hyperParamRanges
@@ -41,32 +43,38 @@ class ModelInfo:
         self.gridSearch = None
         self.trainResultsDf = None
     
-    def fitModelAndGetResults(self, data):
-        #kkk parallelize steps
+    def fitModelAndGetResults(self,data):
+        resultsDf = pd.DataFrame()
+        
         param_combinations = list(itertools.product(*self.hyperParamRanges.values()))
-        resultsDf= pd.DataFrame()
         for params in param_combinations:
             hyperparameters = dict(zip(self.hyperParamRanges.keys(), params))
             model = self.modelFunc(**hyperparameters)
-            for fold, (train_index, test_index) in enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)):
-                fold_xTrain, fold_X_test = data.xTrain[train_index], data.xTrain[test_index]
-                fold_yTrain, fold_y_test = data.yTrain[train_index], data.yTrain[test_index]
-                
-                fittedModel = model.fit(fold_xTrain, fold_yTrain)
-                
-                scores={'model':self.name, 'Parameter Set':str(hyperparameters), 'Fold':fold+1}
-                
-                predicteds=[predictedY('train',fittedModel.predict(fold_X_test),fold_y_test),
-                            predictedY('test',fittedModel.predict(data.xTest),data.yTest)]
-                for predicted in predicteds:
-                    scores.update(predicted.getScores(self.scoring))#kkk do I need update
-                colsOrder=['model', 'Parameter Set', 'Fold', 'testAccuracy', 'testPrecision',
-                'testRecall', 'testF1', 'testRoc_auc', 'trainAccuracy', 'trainPrecision',
-                       'trainRecall', 'trainF1', 'trainRoc_auc']
-                dfRow=pd.DataFrame(scores,index=[0])[colsOrder]
-                resultsDf=pd.concat([resultsDf,dfRow])
-                
+
+            result_rows = Parallel(n_jobs=max(multiprocessing.cpu_count() - 4, 1))(delayed(process_fold)(fold,data,model,self,hyperparameters, train_index, test_index)
+                                           for fold, (train_index, test_index) in
+                                           enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)))
+            resultsDf=pd.concat([resultsDf,*result_rows])
         return resultsDf
+#%%
+def process_fold(fold, data,model,ModelInfoObj,hyperparameters,train_index, test_index):
+    fold_xTrain, fold_X_test = data.xTrain[train_index], data.xTrain[test_index]
+    fold_yTrain, fold_y_test = data.yTrain[train_index], data.yTrain[test_index]
+
+    fittedModel = model.fit(fold_xTrain, fold_yTrain)
+
+    scores = {'model': ModelInfoObj.name, 'Parameter Set': str(hyperparameters), 'Fold': fold + 1}
+
+    predicteds = [predictedY('train', fittedModel.predict(fold_X_test), fold_y_test),
+                  predictedY('test', fittedModel.predict(data.xTest), data.yTest)]
+    for predicted in predicteds:
+        scores.update(predicted.getScores(ModelInfoObj.scoring))
+
+    colsOrder = ['model', 'Parameter Set', 'Fold', 'testAccuracy', 'testPrecision',
+                 'testRecall', 'testF1', 'testRoc_auc', 'trainAccuracy', 'trainPrecision',
+                 'trainRecall', 'trainF1', 'trainRoc_auc']
+    dfRow = pd.DataFrame(scores, index=[0])[colsOrder]
+    return dfRow
 #%% 
 from xgboost import XGBClassifier
 defaultCrossValidationNum=5
@@ -79,7 +87,7 @@ allModels=[ModelInfo('xgboost', XGBClassifier, {
     # ModelInfo(name, modelFunc, {hyperParamRanges},defaultCrossValidationNum)
     ]
 trainTestXY_=trainTestXY(xTrain, xTest , yTrain, yTest)
-totResultsDf= pd.DataFrame()
+totResultsDf = pd.DataFrame()
 for am1 in allModels:
     totResultsDf = pd.concat([totResultsDf, am1.fitModelAndGetResults(trainTestXY_)])
 #%% 
