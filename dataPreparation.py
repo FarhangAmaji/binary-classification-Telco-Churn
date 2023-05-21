@@ -125,7 +125,7 @@ def showClassImbalance(classOfOutput,df):
     sns.countplot(x = classOfOutput, data = df)
     plt.show()
     ratioOfFalseToWhole=len(df[df[classOfOutput]==0])/len(df)
-    print(f'no {classOfOutput} ratio:',ratioOfFalseToWhole)
+    print(f'no {classOfOutput} ratio to whole {classOfOutput} data:',ratioOfFalseToWhole)
     f"so on this data with just predicting 'no' we would get {ratioOfFalseToWhole:.2f}% correct answers!!"
 #%% upsampling
 def performUpsampling(xTrain, yTrain,doUpSampling=False):
