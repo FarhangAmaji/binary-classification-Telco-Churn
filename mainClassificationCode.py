@@ -32,7 +32,7 @@ from sklearn.semi_supervised import LabelSpreading
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.svm import LinearSVC
 from sklearn.linear_model import LogisticRegressionCV
-# from sklearn.neural_network import MLPClassifier
+from sklearn.neural_network import MLPClassifier
 # from sklearn.multioutput import MultiOutputClassifier
 # from sklearn.naive_bayes import MultinomialNB
 # from sklearn.neighbors import NearestCentroid
@@ -244,6 +244,20 @@ allModels = [
 #     'solver': ['liblinear'],
 #     'tol': [1e-4, 1e-5],
 #     'max_iter': [100, 200],
+# }, defaultCrossValidationNum),
+    
+    # MLPClassifier
+    # modelEvaluator('MLPClassifier', MLPClassifier, {
+#     'hidden_layer_sizes': [(100,), (50, 50), (50, 50, 50)],
+#     'activation': ['relu', 'logistic'],
+#     'solver': ['adam'],
+#     'alpha': [0.0001, 0.001],
+#     'batch_size': ['auto'],
+#     'learning_rate': ['constant', 'adaptive'],
+#     'learning_rate_init': [0.001, 0.01],
+#     'max_iter': [200, 500],
+#     'shuffle': [True],
+#     'random_state': [42],
 # }, defaultCrossValidationNum),
     
     # 

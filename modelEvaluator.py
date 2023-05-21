@@ -55,11 +55,11 @@ class modelEvaluator:
                 model = self.modelFunc(**hyperparameters)
     
                 resultRows = self.callParallel(data, model, hyperparameters)
-                resultsDf = pd.concat([resultsDf, *resultRows])
+                resultsDf = pd.concat([resultsDf, *resultRows]).reset_index(drop=True)
         else:
             model = self.modelFunc()
             resultRows = self.callParallel(data, model, '')
-            resultsDf = pd.concat([resultsDf, *resultRows])
+            resultsDf = pd.concat([resultsDf, *resultRows]).reset_index(drop=True)
         return resultsDf
     def callParallel(self,data, model, hyperparameters):
         resultRows = Parallel(n_jobs=max(multiprocessing.cpu_count() - 4, 1))(delayed(self.processFold)(
