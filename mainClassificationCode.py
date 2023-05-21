@@ -31,7 +31,7 @@ from sklearn.semi_supervised import LabelPropagation
 from sklearn.semi_supervised import LabelSpreading
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.svm import LinearSVC
-# from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegressionCV
 # from sklearn.neural_network import MLPClassifier
 # from sklearn.multioutput import MultiOutputClassifier
 # from sklearn.naive_bayes import MultinomialNB
@@ -232,6 +232,18 @@ allModels = [
 #     'intercept_scaling': [1, 2, 5],
 #     'class_weight': [None, 'balanced'],
 #     'max_iter': [1000, 2000],
+# }, defaultCrossValidationNum),
+    
+    # LogisticRegressionCV
+    # modelEvaluator('LogisticRegressionCV', LogisticRegressionCV, {
+#     'Cs': [10, 1, 0.1],
+#     'fit_intercept': [True, False],
+#     'cv': [3, 5],
+#     'penalty': ['l2', 'l1'],
+#     'scoring': ['accuracy', 'roc_auc'],
+#     'solver': ['liblinear'],
+#     'tol': [1e-4, 1e-5],
+#     'max_iter': [100, 200],
 # }, defaultCrossValidationNum),
     
     # 
