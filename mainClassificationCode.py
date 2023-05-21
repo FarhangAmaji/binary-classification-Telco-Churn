@@ -43,7 +43,7 @@ from sklearn.multiclass import OutputCodeClassifier
 from sklearn.linear_model import PassiveAggressiveClassifier
 from sklearn.linear_model import Perceptron
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
-# from sklearn.neighbors import RadiusNeighborsClassifier
+from sklearn.neighbors import RadiusNeighborsClassifier
 # from sklearn.linear_model import RidgeClassifier
 # from sklearn.linear_model import RidgeClassifierCV
 # from sklearn.linear_model import SGDClassifier
@@ -312,6 +312,16 @@ allModels = [
 #     'reg_param': [0.0, 0.1, 0.2],  # Regularization parameter
 #     'store_covariance': [True, False],  # Whether to store covariance matrices
 #     'tol': [1e-4, 1e-5, 1e-6],  # Tolerance for stopping criterion
+# }, defaultCrossValidationNum),
+    
+    # RadiusNeighborsClassifier
+    # modelEvaluator('RadiusNeighborsClassifier', RadiusNeighborsClassifier, {
+#     'radius': [1.0, 1.5, 2.0],  # Radius of the neighborhood
+#     'weights': ['uniform', 'distance'],  # Weight function used in prediction
+#     'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],  # Algorithm used for nearest neighbors search
+#     'leaf_size': [30, 40, 50],  # Leaf size for tree-based algorithms
+#     'p': [1, 2],  # Power parameter for the Minkowski metric
+#     'outlier_label': [None, 0, 1],  # Label assigned to outlier samples
 # }, defaultCrossValidationNum),
     
     # 
