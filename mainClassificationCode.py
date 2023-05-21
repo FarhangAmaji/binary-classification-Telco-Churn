@@ -58,14 +58,14 @@ allModels = [
 #     'algorithm': ['SAMME', 'SAMME.R']
 # }, defaultCrossValidationNum),
     
-    # BaggingClassifier
-    modelEvaluator('BaggingClassifier', BaggingClassifier,  {
-    'estimator': [DecisionTreeClassifier(max_depth=1), DecisionTreeClassifier(max_depth=2)],
-    'n_estimators': [10, 50, 100, 200],
-    'max_samples': [0.5, 0.7, 1.0],
-    'max_features': [0.5, 0.7, 1.0],
-    'bootstrap': [True, False]
-}, defaultCrossValidationNum),
+#     # BaggingClassifier
+#     modelEvaluator('BaggingClassifier', BaggingClassifier,  {
+#     'estimator': [DecisionTreeClassifier(max_depth=1), DecisionTreeClassifier(max_depth=2)],
+#     'n_estimators': [10, 50, 100, 200],
+#     'max_samples': [0.5, 0.7, 1.0],
+#     'max_features': [0.5, 0.7, 1.0],
+#     'bootstrap': [True, False]
+# }, defaultCrossValidationNum),
     
     
     # BernoulliNB
