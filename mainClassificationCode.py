@@ -29,9 +29,8 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.semi_supervised import LabelPropagation
 from sklearn.semi_supervised import LabelSpreading
-# from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 # from sklearn.svm import LinearSVC
-# from sklearn.linear_model import LogisticRegression
 # from sklearn.linear_model import LogisticRegressionCV
 # from sklearn.neural_network import MLPClassifier
 # from sklearn.multioutput import MultiOutputClassifier
@@ -211,6 +210,15 @@ allModels = [
 #     'tol': [1e-3, 1e-4],
 # }, defaultCrossValidationNum),
     
+    
+    # LinearDiscriminantAnalysis
+    # modelEvaluator('LinearDiscriminantAnalysis', LinearDiscriminantAnalysis, {
+#     'solver': ['lsqr', 'eigen'],
+#     'shrinkage': ['auto'],
+#     'priors': [None, [0.1, 0.9], [0.3, 0.7]],
+#     'n_components': [None, 1, 2],
+#     'tol': [1e-4, 1e-5],
+# }, defaultCrossValidationNum),
     
     # 
     # modelEvaluator('name', modelFunc, hyperParamRanges, defaultCrossValidationNum),

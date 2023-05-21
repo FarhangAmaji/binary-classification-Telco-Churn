@@ -29,6 +29,7 @@ steps to do:
             #asDone I had to do the gridSearch manually in order to get all scores for all models; this couldnt be done with grid_search of sklearn
             #done handle without hyperparam modelEvaluation
             separate the modelEval for a single model and (xFold data) now its named processFold but rename it and make it better
+            add an option if the params are in some fileSaved dont do the function
             add confusion matrices
             add drawing of AUC-ROC Curve
             add scaler

@@ -46,6 +46,7 @@ class modelEvaluator:
     def fitModelAndGetResults(self, data):
         print(f'started fitting {self.name}')
         resultsDf = pd.DataFrame()
+        #kkk add an option if the params are in some fileSaved dont do the function
         
         if self.hyperParamRanges:
             paramCombinations = list(itertools.product(*self.hyperParamRanges.values()))
