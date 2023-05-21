@@ -22,6 +22,34 @@ from sklearn.dummy import DummyClassifier
 from sklearn.tree import ExtraTreeClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.naive_bayes import GaussianNB
+from sklearn.gaussian_process import GaussianProcessClassifier #kkk took so long check it later
+from sklearn.gaussian_process.kernels import RBF, Matern, DotProduct #kkk this is for GaussianProcessClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+# from sklearn.ensemble import HistGradientBoostingClassifier
+# from sklearn.neighbors import KNeighborsClassifier
+# from sklearn.semi_supervised import LabelPropagation
+# from sklearn.semi_supervised import LabelSpreading
+# from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+# from sklearn.svm import LinearSVC
+# from sklearn.linear_model import LogisticRegression
+# from sklearn.linear_model import LogisticRegressionCV
+# from sklearn.neural_network import MLPClassifier
+# from sklearn.multioutput import MultiOutputClassifier
+# from sklearn.naive_bayes import MultinomialNB
+# from sklearn.neighbors import NearestCentroid
+# from sklearn.svm import NuSVC
+# from sklearn.multiclass import OneVsOneClassifier
+# from sklearn.multiclass import OneVsRestClassifier
+# from sklearn.multiclass import OutputCodeClassifier
+# from sklearn.linear_model import PassiveAggressiveClassifier
+# from sklearn.linear_model import Perceptron
+# from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+# from sklearn.neighbors import RadiusNeighborsClassifier
+# from sklearn.ensemble import RandomForestClassifier
+# from sklearn.linear_model import RidgeClassifier
+# from sklearn.linear_model import RidgeClassifierCV
+# from sklearn.linear_model import SGDClassifier
+# from sklearn.svm import SVC
 #%% 
 telcoChurn, xTrain, xTest, yTrain, yTest = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
 #%%
@@ -126,7 +154,20 @@ allModels = [
 # }, defaultCrossValidationNum),
 
     # GaussianNB
-    modelEvaluator('GaussianNB', GaussianNB, {}, defaultCrossValidationNum),
+    # modelEvaluator('GaussianNB', GaussianNB, {}, defaultCrossValidationNum),
+    
+    # GradientBoostingClassifier
+#     # modelEvaluator('GradientBoostingClassifier', GradientBoostingClassifier, {
+#     'loss': ['log_loss', 'exponential'],
+#     'learning_rate': [0.1, 0.01, 0.001],
+#     'n_estimators': [100, 200, 500],
+#     'subsample': [0.5, 0.7, 1.0],
+#     'max_depth': [3, 5, None],
+#     'min_samples_split': [2, 5, 10],
+#     'min_samples_leaf': [1, 2, 4],
+#     'max_features': ['sqrt', 'log2', None],
+#     'random_state': [None, 42]
+# }, defaultCrossValidationNum),
 
     # 
     # modelEvaluator('name', modelFunc, hyperParamRanges, defaultCrossValidationNum),
