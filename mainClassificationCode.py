@@ -114,17 +114,6 @@ allModels = [
 # }, defaultCrossValidationNum),
 
     # ExtraTreesClassifier
-    modelEvaluator('ExtraTreesClassifier', ExtraTreesClassifier, {
-    'n_estimators': [100],
-    'criterion': ['entropy'],
-    'max_depth': [None, 5],
-    'min_samples_split': [2, 5],
-    'min_samples_leaf': [1],
-    'max_features': ['auto'],
-    'bootstrap': [False],
-    'random_state': [None]
-}, defaultCrossValidationNum),
-    # ExtraTreesClassifier
 #     modelEvaluator('ExtraTreesClassifier', ExtraTreesClassifier, {
 #     'n_estimators': [100, 200, 300],
 #     'criterion': ['gini', 'entropy'],
