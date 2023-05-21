@@ -38,7 +38,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import NearestCentroid
 from sklearn.svm import NuSVC #kkk took so long check it later
 from sklearn.multiclass import OneVsOneClassifier
-# from sklearn.multiclass import OneVsRestClassifier
+from sklearn.multiclass import OneVsRestClassifier
 # from sklearn.multiclass import OutputCodeClassifier
 # from sklearn.linear_model import PassiveAggressiveClassifier
 # from sklearn.linear_model import Perceptron
@@ -272,6 +272,11 @@ allModels = [
     
     # OneVsOneClassifier
 #     modelEvaluator('OneVsOneClassifier', OneVsOneClassifier, {
+#     'estimator': [RandomForestClassifier()],
+# }, defaultCrossValidationNum),
+
+    # OneVsRestClassifier
+#     modelEvaluator('OneVsRestClassifier', OneVsRestClassifier, {
 #     'estimator': [RandomForestClassifier()],
 # }, defaultCrossValidationNum),
     
