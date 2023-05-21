@@ -44,7 +44,7 @@ from sklearn.linear_model import PassiveAggressiveClassifier
 from sklearn.linear_model import Perceptron
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neighbors import RadiusNeighborsClassifier
-# from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import RidgeClassifier
 # from sklearn.linear_model import RidgeClassifierCV
 # from sklearn.linear_model import SGDClassifier
 # from sklearn.svm import SVC
@@ -322,6 +322,15 @@ allModels = [
 #     'leaf_size': [30, 40, 50],  # Leaf size for tree-based algorithms
 #     'p': [1, 2],  # Power parameter for the Minkowski metric
 #     'outlier_label': [None, 0, 1],  # Label assigned to outlier samples
+# }, defaultCrossValidationNum),
+    
+    # RidgeClassifier
+    # modelEvaluator('RidgeClassifier', RidgeClassifier, {
+#     'alpha': [1.0, 0.5, 0.1],  # Regularization strength
+#     'fit_intercept': [True, False],  # Whether to fit an intercept term
+#     'solver': ['auto', 'svd', 'cholesky', 'lsqr', 'sparse_cg', 'sag', 'saga'],  # Solver for optimization problem
+#     'max_iter': [1000, 2000],  # Maximum number of iterations
+#     'tol': [1e-3, 1e-4, 1e-5],  # Tolerance for stopping criteria
 # }, defaultCrossValidationNum),
     
     # 
