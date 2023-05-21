@@ -39,25 +39,32 @@ class modelEvaluator:
             'precision': precision_score,
             'recall': recall_score,
             'f1': f1_score,
-            'rocAuc': roc_auc_score
+            'rocAuc': roc_auc_score,
             'cohenKappaScore': cohen_kappa_score
         }
 
     def fitModelAndGetResults(self, data):
         resultsDf = pd.DataFrame()
-
-        paramCombinations = list(itertools.product(*self.hyperParamRanges.values()))
-        for params in paramCombinations:
-            hyperparameters = dict(zip(self.hyperParamRanges.keys(), params))
-            model = self.modelFunc(**hyperparameters)
-
-            resultRows = Parallel(n_jobs=max(multiprocessing.cpu_count() - 4, 1))(delayed(self.processFold)(
-                fold, data, model, hyperparameters, trainIndex, testIndex)
-                                    for fold, (trainIndex, testIndex) in enumerate(
-                                    self.stratifiedKFold.split(data.xTrain, data.yTrain)))
+        
+        if self.hyperParamRanges:
+            paramCombinations = list(itertools.product(*self.hyperParamRanges.values()))
+            for params in paramCombinations:
+                hyperparameters = dict(zip(self.hyperParamRanges.keys(), params))
+                model = self.modelFunc(**hyperparameters)
+    
+                resultRows = self.callParallel(data, model, hyperparameters)
+                resultsDf = pd.concat([resultsDf, *resultRows])
+        else:
+            model = self.modelFunc()
+            resultRows = self.callParallel(data, model, '')
             resultsDf = pd.concat([resultsDf, *resultRows])
         return resultsDf
-
+    def callParallel(self,data, model, hyperparameters):
+        resultRows = Parallel(n_jobs=max(multiprocessing.cpu_count() - 4, 1))(delayed(self.processFold)(
+            fold, data, model, hyperparameters, trainIndex, testIndex)
+                                for fold, (trainIndex, testIndex) in enumerate(
+                                self.stratifiedKFold.split(data.xTrain, data.yTrain)))
+        return resultRows
     def processFold(self, fold, data, model, hyperparameters, trainIndex, testIndex):
         foldXTrain, foldXTest = data.xTrain[trainIndex], data.xTrain[testIndex]
         foldYTrain, foldYTest = data.yTrain[trainIndex], data.yTrain[testIndex]
@@ -74,9 +81,8 @@ class modelEvaluator:
             scores.update(predicted.getScores(self.scoring))
 
         cols_order = [
-            'model', 'Parameter Set', 'Fold', 'testAccuracy', 'testPrecision',
-            'testRecall', 'testF1', 'testRocAuc', 'trainAccuracy', 'trainPrecision',
-            'trainRecall', 'trainF1', 'trainRocAuc'
-        ]
+            'model', 'Parameter Set', 'Fold', 'testAccuracy', 'testPrecision', 'testRecall', 
+        'testF1', 'testRocauc','testCohenkappascore','trainAccuracy', 'trainPrecision',
+        'trainRecall', 'trainF1', 'trainRocauc', 'trainCohenkappascore', ]
         df_row = pd.DataFrame(scores, index=[0])[cols_order]
         return df_row

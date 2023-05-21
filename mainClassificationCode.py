@@ -1,11 +1,14 @@
 #%% imports
 import os
 import pandas as pd
-from xgboost import XGBClassifier
 base_folder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(base_folder)
+
 from dataPreparation import dataPreparation
 from modelEvaluator import modelEvaluator,trainTestXY 
+
+from xgboost import XGBClassifier
+# from sklearn.ensemble import RandomForestClassifier
 #%% 
 telcoChurn, xTrain, xTest, yTrain, yTest = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
 
@@ -22,8 +25,11 @@ allModels = [
         },
         defaultCrossValidationNum
     )
+    
+    # modelEvaluator(name, modelFunc, hyperParamRanges, crossValidationNum)
 ]
 
+#kkk add scaler
 trainTestXY_ = trainTestXY(xTrain, xTest, yTrain, yTest)
 totResultsDf = pd.DataFrame()
 
