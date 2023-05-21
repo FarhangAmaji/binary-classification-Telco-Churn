@@ -18,6 +18,8 @@ from sklearn.calibration import CalibratedClassifierCV #kkk gave error
 from sklearn.multioutput import ClassifierChain  #kkk gave lots of error
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import ComplementNB
+from sklearn.dummy import DummyClassifier
+
 #%% 
 telcoChurn, xTrain, xTest, yTrain, yTest = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
 #%%
@@ -86,11 +88,17 @@ allModels = [
 #     'class_weight': [None, 'balanced']
 # }, defaultCrossValidationNum),
 
-    # ComplementNB
-    modelEvaluator('ComplementNB', ComplementNB, {
-    'alpha': [0.1, 0.5, 1.0],
-    'fit_prior': [True, False],
-    'norm': [True, False]
+#     # ComplementNB
+#     modelEvaluator('ComplementNB', ComplementNB, {
+#     'alpha': [0.1, 0.5, 1.0],
+#     'fit_prior': [True, False],
+#     'norm': [True, False]
+# }, defaultCrossValidationNum),
+
+    # DummyClassifier
+    modelEvaluator('DummyClassifier', DummyClassifier, {
+    'strategy': ['stratified', 'most_frequent', 'prior', 'uniform'],
+    'random_state': [None, 42]
 }, defaultCrossValidationNum),
 
     # 
