@@ -25,7 +25,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.gaussian_process import GaussianProcessClassifier #kkk took so long check it later
 from sklearn.gaussian_process.kernels import RBF, Matern, DotProduct #kkk this is for GaussianProcessClassifier
 from sklearn.ensemble import GradientBoostingClassifier
-# from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.ensemble import HistGradientBoostingClassifier
 # from sklearn.neighbors import KNeighborsClassifier
 # from sklearn.semi_supervised import LabelPropagation
 # from sklearn.semi_supervised import LabelSpreading
@@ -166,6 +166,19 @@ allModels = [
 #     'min_samples_split': [2, 5, 10],
 #     'min_samples_leaf': [1, 2, 4],
 #     'max_features': ['sqrt', 'log2', None],
+#     'random_state': [None, 42]
+# }, defaultCrossValidationNum),
+
+    # HistGradientBoostingClassifier
+    # modelEvaluator('HistGradientBoostingClassifier', HistGradientBoostingClassifier, {
+#     'loss': ['binary_crossentropy', 'log_loss'],
+#     'learning_rate': [0.1, 0.01, 0.001],
+#     'max_iter': [100, 200, 500],
+#     'max_depth': [3, 5, None],
+#     'min_samples_leaf': [1, 2, 4],
+#     'max_bins': [64, 128, 255],
+#     'l2_regularization': [0.0, 0.1, 0.01],
+#     'early_stopping': [True, 'auto'],
 #     'random_state': [None, 42]
 # }, defaultCrossValidationNum),
 

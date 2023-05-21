@@ -44,7 +44,7 @@ class modelEvaluator:
         }
 
     def fitModelAndGetResults(self, data):
-        print('started fitting {self.name}')
+        print(f'started fitting {self.name}')
         resultsDf = pd.DataFrame()
         
         if self.hyperParamRanges:
