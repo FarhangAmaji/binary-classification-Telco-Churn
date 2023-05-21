@@ -41,7 +41,7 @@ from sklearn.multiclass import OneVsOneClassifier
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.multiclass import OutputCodeClassifier
 from sklearn.linear_model import PassiveAggressiveClassifier
-# from sklearn.linear_model import Perceptron
+from sklearn.linear_model import Perceptron
 # from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 # from sklearn.neighbors import RadiusNeighborsClassifier
 # from sklearn.linear_model import RidgeClassifier
@@ -293,6 +293,16 @@ allModels = [
 #     'max_iter': [1000, 2000, 3000],  # Maximum number of iterations
 #     'tol': [1e-3, 1e-4, 1e-5],  # Tolerance for stopping criterion
 #     'loss': ['hinge', 'squared_hinge'],  # Loss function ('hinge' or 'squared_hinge')
+#     'random_state': [42]  # Random state for reproducibility
+# }, defaultCrossValidationNum),
+    
+    # Perceptron
+    # modelEvaluator('Perceptron', Perceptron, {
+#     'alpha': [0.0001, 0.001, 0.01],  # Regularization strength
+#     'fit_intercept': [True, False],  # Whether to include an intercept term
+#     'max_iter': [1000, 2000, 3000],  # Maximum number of iterations
+#     'tol': [1e-3, 1e-4, 1e-5],  # Tolerance for stopping criterion
+#     'shuffle': [True, False],  # Whether to shuffle the training data in each epoch
 #     'random_state': [42]  # Random state for reproducibility
 # }, defaultCrossValidationNum),
     
