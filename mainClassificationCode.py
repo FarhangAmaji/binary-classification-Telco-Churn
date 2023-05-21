@@ -46,8 +46,8 @@ from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neighbors import RadiusNeighborsClassifier
 from sklearn.linear_model import RidgeClassifier
 from sklearn.linear_model import RidgeClassifierCV
-# from sklearn.linear_model import SGDClassifier
-# from sklearn.svm import SVC
+from sklearn.linear_model import SGDClassifier
+from sklearn.svm import SVC
 #%% 
 telcoChurn, xTrain, xTest, yTrain, yTest = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
 #%%
@@ -341,6 +341,22 @@ allModels = [
 #     'cv': [None, 5, 10],  # Number of cross-validation folds or a specific cross-validation object
 #     'class_weight': [None, 'balanced'],  # Weights associated with classes
 #     'store_cv_values': [False, True],  # Whether to store the cross-validation values for each alpha
+# }, defaultCrossValidationNum),
+    
+    # SGDClassifier
+    # modelEvaluator('SGDClassifier', SGDClassifier, {
+#     'loss': ['hinge', 'log', 'modified_huber', 'squared_hinge', 'perceptron'],  # Loss function
+#     'penalty': ['l2', 'l1', 'elasticnet'],  # Regularization type
+#     'alpha': [0.0001, 0.001, 0.01, 0.1],  # Regularization parameter
+#     'l1_ratio': [0.15, 0.25, 0.5, 0.75],  # L1 ratio for elastic net regularization
+#     'fit_intercept': [True, False],  # Whether to fit an intercept term
+#     'max_iter': [1000, 2000, 5000],  # Maximum number of iterations
+#     'tol': [1e-3, 1e-4, 1e-5],  # Tolerance for stopping criterion
+#     'shuffle': [True, False],  # Whether to shuffle the training data in each epoch
+#     'eta0': [0.01, 0.1, 1.0],  # Initial learning rate
+#     'learning_rate': ['constant', 'optimal', 'invscaling'],  # Learning rate schedule
+#     'class_weight': [None, 'balanced'],  # Weights associated with classes
+#     'average': [False, True],  # Whether to compute the averaged SGD weights
 # }, defaultCrossValidationNum),
     
     # 
