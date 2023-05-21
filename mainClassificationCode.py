@@ -35,7 +35,7 @@ from sklearn.linear_model import LogisticRegressionCV
 from sklearn.neural_network import MLPClassifier
 from sklearn.multioutput import MultiOutputClassifier #kkk didnt understand how to apply hyperparameters; to be more precise the way of applying was different
 from sklearn.naive_bayes import MultinomialNB
-# from sklearn.neighbors import NearestCentroid
+from sklearn.neighbors import NearestCentroid
 # from sklearn.svm import NuSVC
 # from sklearn.multiclass import OneVsOneClassifier
 # from sklearn.multiclass import OneVsRestClassifier
@@ -51,7 +51,7 @@ from sklearn.naive_bayes import MultinomialNB
 #%% 
 telcoChurn, xTrain, xTest, yTrain, yTest = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
 #%%
-defaultCrossValidationNum = 5
+defaultCrossValidationNum = 2#kkk change it back to 5
 allModels = [
     # xgboost
     # modelEvaluator(
@@ -262,6 +262,11 @@ allModels = [
     # MultinomialNB
 #     modelEvaluator('MultinomialNB', MultinomialNB, {
 #     'alpha': [0.1, 0.5, 1.0, 10.0],
+# }, defaultCrossValidationNum),
+    
+    # NearestCentroid
+#     modelEvaluator('NearestCentroid', NearestCentroid, {
+#     'metric': ['euclidean', 'manhattan', 'cosine'],
 # }, defaultCrossValidationNum),
     
     # 
