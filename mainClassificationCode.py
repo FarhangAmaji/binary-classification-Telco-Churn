@@ -42,7 +42,7 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.multiclass import OutputCodeClassifier
 from sklearn.linear_model import PassiveAggressiveClassifier
 from sklearn.linear_model import Perceptron
-# from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 # from sklearn.neighbors import RadiusNeighborsClassifier
 # from sklearn.linear_model import RidgeClassifier
 # from sklearn.linear_model import RidgeClassifierCV
@@ -304,6 +304,14 @@ allModels = [
 #     'tol': [1e-3, 1e-4, 1e-5],  # Tolerance for stopping criterion
 #     'shuffle': [True, False],  # Whether to shuffle the training data in each epoch
 #     'random_state': [42]  # Random state for reproducibility
+# }, defaultCrossValidationNum),
+    
+    # QuadraticDiscriminantAnalysis
+    # modelEvaluator('QuadraticDiscriminantAnalysis', QuadraticDiscriminantAnalysis, {
+#     'priors': [None, [0.25, 0.75], [0.5, 0.5]],  # Class priors
+#     'reg_param': [0.0, 0.1, 0.2],  # Regularization parameter
+#     'store_covariance': [True, False],  # Whether to store covariance matrices
+#     'tol': [1e-4, 1e-5, 1e-6],  # Tolerance for stopping criterion
 # }, defaultCrossValidationNum),
     
     # 
