@@ -9,31 +9,27 @@ from modelEvaluator import modelEvaluator,trainTestXY
 
 from xgboost import XGBClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import AdaBoostClassifier
 #%% 
 telcoChurn, xTrain, xTest, yTrain, yTest = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
 
 defaultCrossValidationNum = 5
 allModels = [
-    modelEvaluator(
-        'xgboost',
-        XGBClassifier,
-        {
-            'learning_rate': [0.01, 0.02],
-            'subsample': [0.8, 1],
-            'colsample_bytree': [0.8, 1],
-            'n_estimators': [450, 500]
-        },
-        defaultCrossValidationNum
-    ),
+    # xgboost
+    # modelEvaluator(
+    #     'xgboost',
+    #     XGBClassifier,
+    #     {
+    #         'learning_rate': [0.01, 0.02],
+    #         'subsample': [0.8, 1],
+    #         'colsample_bytree': [0.8, 1],
+    #         'n_estimators': [450, 500]
+    #     },
+    #     defaultCrossValidationNum
+    # ),
     
-    # modelEvaluator('RandomForestClassifier', RandomForestClassifier, {
-    # 'n_estimators': [50,100],
-    # 'criterion': ['gini'],
-    # 'max_depth': [None, 5, ],
-    # 'min_samples_split': [2],
-    # 'min_samples_leaf': [1, ],
-    # 'max_features': ['auto']}, defaultCrossValidationNum),
-    
+    #RandomForestClassifier
     # modelEvaluator('RandomForestClassifier', RandomForestClassifier, {
     # 'n_estimators': [50, 100, 200, 500],
     # 'criterion': ['gini', 'entropy'],
@@ -41,6 +37,32 @@ allModels = [
     # 'min_samples_split': [2, 5, 10],
     # 'min_samples_leaf': [1, 2, 4],
     # 'max_features': ['auto', 'sqrt', 'log2']}, defaultCrossValidationNum),
+    
+    
+    # DecisionTreeClassifier
+    modelEvaluator('DecisionTreeClassifier', DecisionTreeClassifier, {
+    'criterion': ['gini'],
+    'max_depth': [5],
+    'min_samples_split': [2],
+    'min_samples_leaf': [1],
+    'max_features': ['auto', 'sqrt']
+}, defaultCrossValidationNum),
+#     # DecisionTreeClassifier
+#     # modelEvaluator('DecisionTreeClassifier', DecisionTreeClassifier, {
+#     'criterion': ['gini', 'entropy'],
+#     'max_depth': [None, 5, 10, 20],
+#     'min_samples_split': [2, 5, 10],
+#     'min_samples_leaf': [1, 2, 4],
+#     'max_features': ['auto', 'sqrt', 'log2']
+# }, defaultCrossValidationNum),
+    
+    #AdaBoostClassifier
+    # modelEvaluator('AdaBoostClassifier', AdaBoostClassifier, hyperparameters = {
+#     'base_estimator': [DecisionTreeClassifier(max_depth=1), DecisionTreeClassifier(max_depth=2)],
+#     'n_estimators': [50, 100, 200, 500],
+#     'learning_rate': [0.1, 0.5, 1.0],
+#     'algorithm': ['SAMME', 'SAMME.R']
+# }, defaultCrossValidationNum),
     
     # modelEvaluator(name, modelFunc, hyperParamRanges, defaultCrossValidationNum),
 ]
