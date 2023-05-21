@@ -39,7 +39,7 @@ from sklearn.neighbors import NearestCentroid
 from sklearn.svm import NuSVC #kkk took so long check it later
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.multiclass import OneVsRestClassifier
-# from sklearn.multiclass import OutputCodeClassifier
+from sklearn.multiclass import OutputCodeClassifier
 # from sklearn.linear_model import PassiveAggressiveClassifier
 # from sklearn.linear_model import Perceptron
 # from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
@@ -278,6 +278,12 @@ allModels = [
     # OneVsRestClassifier
 #     modelEvaluator('OneVsRestClassifier', OneVsRestClassifier, {
 #     'estimator': [RandomForestClassifier()],
+# }, defaultCrossValidationNum),
+    
+    # OutputCodeClassifier
+#     modelEvaluator('OutputCodeClassifier', OutputCodeClassifier, {
+#     'estimator': [RandomForestClassifier()],
+#     'code_size': [0.5, 1.0, 1.5],  # Example values for the 'code_size' hyperparameter
 # }, defaultCrossValidationNum),
     
     # 
