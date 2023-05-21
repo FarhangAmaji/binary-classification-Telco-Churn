@@ -45,7 +45,7 @@ from sklearn.linear_model import Perceptron
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neighbors import RadiusNeighborsClassifier
 from sklearn.linear_model import RidgeClassifier
-# from sklearn.linear_model import RidgeClassifierCV
+from sklearn.linear_model import RidgeClassifierCV
 # from sklearn.linear_model import SGDClassifier
 # from sklearn.svm import SVC
 #%% 
@@ -331,6 +331,16 @@ allModels = [
 #     'solver': ['auto', 'svd', 'cholesky', 'lsqr', 'sparse_cg', 'sag', 'saga'],  # Solver for optimization problem
 #     'max_iter': [1000, 2000],  # Maximum number of iterations
 #     'tol': [1e-3, 1e-4, 1e-5],  # Tolerance for stopping criteria
+# }, defaultCrossValidationNum),
+    
+    # RidgeClassifierCV
+    # modelEvaluator('RidgeClassifierCV', RidgeClassifierCV, {
+#     'alphas': [[0.1, 1.0, 10.0]],  # List of alpha values to try
+#     'fit_intercept': [True, False],  # Whether to fit an intercept term
+#     'scoring': ['accuracy', 'f1_macro'],  # Scoring metric for cross-validation
+#     'cv': [None, 5, 10],  # Number of cross-validation folds or a specific cross-validation object
+#     'class_weight': [None, 'balanced'],  # Weights associated with classes
+#     'store_cv_values': [False, True],  # Whether to store the cross-validation values for each alpha
 # }, defaultCrossValidationNum),
     
     # 
