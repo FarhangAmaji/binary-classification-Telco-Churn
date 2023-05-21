@@ -26,6 +26,7 @@ steps to do:
         do first model:
             #done Hyperparameter Tuning
             #done 5fold Cross-validation
+            #asDone I had to do the gridSearch manually in order to get all scores for all models; this couldnt be done with grid_search of sklearn
             #kkk add subSteps later
         
         explain output data:

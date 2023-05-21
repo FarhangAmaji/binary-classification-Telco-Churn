@@ -3,7 +3,7 @@ import itertools
 import multiprocessing
 from joblib import delayed, Parallel
 import pandas as pd
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score,cohen_kappa_score
 from sklearn.model_selection import StratifiedKFold
 #%%
 class trainTestXY:
@@ -39,7 +39,8 @@ class modelEvaluator:
             'precision': precision_score,
             'recall': recall_score,
             'f1': f1_score,
-            'roc_auc': roc_auc_score
+            'rocAuc': roc_auc_score
+            'cohenKappaScore': cohen_kappa_score
         }
 
     def fitModelAndGetResults(self, data):
@@ -74,8 +75,8 @@ class modelEvaluator:
 
         cols_order = [
             'model', 'Parameter Set', 'Fold', 'testAccuracy', 'testPrecision',
-            'testRecall', 'testF1', 'testRoc_auc', 'trainAccuracy', 'trainPrecision',
-            'trainRecall', 'trainF1', 'trainRoc_auc'
+            'testRecall', 'testF1', 'testRocAuc', 'trainAccuracy', 'trainPrecision',
+            'trainRecall', 'trainF1', 'trainRocAuc'
         ]
         df_row = pd.DataFrame(scores, index=[0])[cols_order]
         return df_row
