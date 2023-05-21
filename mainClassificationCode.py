@@ -27,7 +27,7 @@ from sklearn.gaussian_process.kernels import RBF, Matern, DotProduct #kkk this i
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.neighbors import KNeighborsClassifier
-# from sklearn.semi_supervised import LabelPropagation
+from sklearn.semi_supervised import LabelPropagation
 # from sklearn.semi_supervised import LabelSpreading
 # from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 # from sklearn.svm import LinearSVC
@@ -190,6 +190,15 @@ allModels = [
 #     'leaf_size': [30, 50, 100],
 #     'p': [1, 2],
 #     'metric': ['euclidean', 'manhattan'],
+# }, defaultCrossValidationNum),
+
+    # LabelPropagation
+    # modelEvaluator('LabelPropagation', LabelPropagation, {
+#     'kernel': ['knn', 'rbf'],
+#     'gamma': [None, 0.1, 1.0],
+#     'n_neighbors': [3, 5, 10],
+#     'max_iter': [100, 200, 500],
+#     'tol': [1e-3, 1e-4],
 # }, defaultCrossValidationNum),
 
     # 
