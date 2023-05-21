@@ -28,7 +28,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.semi_supervised import LabelPropagation
-# from sklearn.semi_supervised import LabelSpreading
+from sklearn.semi_supervised import LabelSpreading
 # from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 # from sklearn.svm import LinearSVC
 # from sklearn.linear_model import LogisticRegression
@@ -201,6 +201,17 @@ allModels = [
 #     'tol': [1e-3, 1e-4],
 # }, defaultCrossValidationNum),
 
+    # LabelSpreading
+    # modelEvaluator('LabelSpreading', LabelSpreading, {
+#     'kernel': ['knn', 'rbf'],
+#     'gamma': ['auto', 0.1, 1.0],
+#     'n_neighbors': [3, 5, 10],
+#     'alpha': [0.2, 0.5, 0.8],
+#     'max_iter': [100, 200, 500],
+#     'tol': [1e-3, 1e-4],
+# }, defaultCrossValidationNum),
+    
+    
     # 
     # modelEvaluator('name', modelFunc, hyperParamRanges, defaultCrossValidationNum),
 ]
