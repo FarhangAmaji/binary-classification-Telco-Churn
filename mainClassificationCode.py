@@ -36,8 +36,8 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.multioutput import MultiOutputClassifier #kkk didnt understand how to apply hyperparameters; to be more precise the way of applying was different
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import NearestCentroid
-# from sklearn.svm import NuSVC
-# from sklearn.multiclass import OneVsOneClassifier
+from sklearn.svm import NuSVC #kkk took so long check it later
+from sklearn.multiclass import OneVsOneClassifier
 # from sklearn.multiclass import OneVsRestClassifier
 # from sklearn.multiclass import OutputCodeClassifier
 # from sklearn.linear_model import PassiveAggressiveClassifier
@@ -267,6 +267,12 @@ allModels = [
     # NearestCentroid
 #     modelEvaluator('NearestCentroid', NearestCentroid, {
 #     'metric': ['euclidean', 'manhattan', 'cosine'],
+# }, defaultCrossValidationNum),
+    
+    
+    # OneVsOneClassifier
+#     modelEvaluator('OneVsOneClassifier', OneVsOneClassifier, {
+#     'estimator': [RandomForestClassifier()],
 # }, defaultCrossValidationNum),
     
     # 
