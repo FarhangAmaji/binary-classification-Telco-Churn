@@ -27,8 +27,11 @@ steps to do:
             #done Hyperparameter Tuning
             #done 5fold Cross-validation
             #asDone I had to do the gridSearch manually in order to get all scores for all models; this couldnt be done with grid_search of sklearn
+            #done handle without hyperparam modelEvaluation
+            separate the modelEval for a single model and (xFold data) now its named processFold but rename it and make it better
+            add confusion matrices
+            add drawing of AUC-ROC Curve
             add scaler
-            handle without hyperparam modelEvaluation
             #kkk add subSteps later
         
         explain output data:
