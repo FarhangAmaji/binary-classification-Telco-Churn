@@ -19,7 +19,7 @@ from sklearn.multioutput import ClassifierChain  #kkk gave lots of error
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import ComplementNB
 from sklearn.dummy import DummyClassifier
-
+from sklearn.tree import ExtraTreeClassifier
 #%% 
 telcoChurn, xTrain, xTest, yTrain, yTest = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
 #%%
@@ -96,8 +96,18 @@ allModels = [
 # }, defaultCrossValidationNum),
 
     # DummyClassifier
-    modelEvaluator('DummyClassifier', DummyClassifier, {
-    'strategy': ['stratified', 'most_frequent', 'prior', 'uniform'],
+#     modelEvaluator('DummyClassifier', DummyClassifier, {
+#     'strategy': ['stratified', 'most_frequent', 'prior', 'uniform'],
+#     'random_state': [None, 42]
+# }, defaultCrossValidationNum),
+
+    # ExtraTreeClassifier
+    modelEvaluator('ExtraTreeClassifier', ExtraTreeClassifier, {
+    'criterion': ['gini', 'entropy'],
+    'max_depth': [None, 5, 10],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+    'max_features': ['auto', 'sqrt', 'log2'],
     'random_state': [None, 42]
 }, defaultCrossValidationNum),
 
