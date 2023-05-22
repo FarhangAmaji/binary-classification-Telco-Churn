@@ -32,13 +32,13 @@ steps to do:
             #done add scaler
             #done add option for not using cross validation
             #done add env variables
-            add other models like lgbm
+            add other models like lgbm+hyperparams
             do minimal model for hyperparams check and revise hyperparams
-            separate the modelEval for a single model and (xFold data) now its named processFold but rename it and make it better
             check if some model has lots of errors
             add confusion matrices
             add drawing of AUC-ROC Curve
             add comments
+            separate the modelEval for a single model and (xFold data) now its named processFold but rename it and make it better
             #kkk add subSteps later
         
         explain output data:

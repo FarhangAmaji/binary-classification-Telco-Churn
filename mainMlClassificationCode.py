@@ -14,7 +14,7 @@ from utils import q,ti, inputTimeout
 telcoChurn, trainTestXY_ = dataPreparation(criticalOutlierColsForARow=1)
 #%%
 t0=ti()
-inputTimeout('have u checked the envVars',30)
+inputTimeout(f'have u checked the envVars.\nenvVars={envVars}',30)
 csvFileName=envVars['csvFileName']
 if os.path.exists(f'{csvFileName}.csv'):
     totResultsDf = pd.read_csv(f'{csvFileName}.csv')
@@ -23,7 +23,7 @@ else:
 if __name__ == '__main__':
     for m1 in allModelConfigs:
         print(m1.name,'started',ti()-t0,'s')
-        totResultsDf = pd.concat([totResultsDf, m1.fitModelAndGetResults(trainTestXY_,totResultsDf,parallel=False)])
+        totResultsDf = pd.concat([totResultsDf, m1.fitModelAndGetResults(trainTestXY_,totResultsDf,parallel=envVars['parallel'])])
         totResultsDf.to_csv(f'{csvFileName}.csv', index=False, header=True)
         print(m1.name,'finished',ti()-t0,'s')
     print('lasted',ti()-t0,'s')

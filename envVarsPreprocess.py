@@ -1,5 +1,6 @@
 envVars={'crossValNum':2,
-         'upSampling':False}
+         'upSampling':False,
+         'parallel':False}
 
 if envVars["crossValNum"] < 2:
     envVars['cv']=False
