@@ -8,7 +8,7 @@ else:
 
 envVars['csvFileName']='churnTotResults'
 if envVars['cv']:
-    envVars['csvFileName']+=envVars["crossValNum"]+'cv'
+    envVars['csvFileName']+=str(envVars["crossValNum"])+'cv'
 else:
     envVars['csvFileName']+='NoCv'
 if not envVars['upSampling']:

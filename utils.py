@@ -1,4 +1,8 @@
 import time
+import threading
+
+ti=time.time
+
 def q(*t,typ="a",filewrite="",path="",s="",il="",noPrint=0,filename='plog'):#kkk some options like filename exist in original print#kkk rewrite it
     '''
     Parameters
@@ -34,4 +38,23 @@ def q(*t,typ="a",filewrite="",path="",s="",il="",noPrint=0,filename='plog'):#kkk
     if s==1:
         1/0
 
-ti=time.time
+def inputTimeout(prompt, timeout=30):
+    print(prompt)
+    user_input = [None]
+
+    def inputThread():
+        user_input[0] = input()
+
+    # Start the input thread
+    thread = threading.Thread(target=inputThread)
+    thread.start()
+
+    # Wait for the thread to finish or timeout
+    thread.join(timeout)
+
+    # Check if input was received or timeout occurred
+    if thread.is_alive():
+        print("No input received. Continuing the code...")
+        return None
+    else:
+        return user_input[0]

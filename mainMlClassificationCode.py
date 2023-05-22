@@ -9,11 +9,12 @@ from dataPreparationModule import dataPreparation
 from modelEvaluatorModule import modelEvaluator
 from modelConfigs import allModelConfigs
 from envVarsPreprocess import envVars
-from utils import q,ti
+from utils import q,ti, inputTimeout
 #%% 
 telcoChurn, trainTestXY_ = dataPreparation(criticalOutlierColsForARow=1)
 #%%
 t0=ti()
+inputTimeout('have u checked the envVars',30)
 csvFileName=envVars['csvFileName']
 if os.path.exists(f'{csvFileName}.csv'):
     totResultsDf = pd.read_csv(f'{csvFileName}.csv')
