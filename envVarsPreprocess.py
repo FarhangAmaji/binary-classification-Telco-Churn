@@ -1,6 +1,6 @@
 envVars={'crossValNum':2,
          'upSampling':False,
-         'parallel':False,
+         'parallel':True,
          'paramCheckMode':True
          }
 

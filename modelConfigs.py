@@ -97,7 +97,7 @@ allModelConfigs = [
     'max_depth': [None, 5, 10, 20],
     'min_samples_split': [2, 5, 10],
     'min_samples_leaf': [1, 2, 4],
-    'max_features': ['auto', 'sqrt', 'log2']
+    'max_features': ['sqrt', 'log2']
 }, defaultCrossValidationNum),
     
     #AdaBoostClassifier
@@ -150,7 +150,7 @@ allModelConfigs = [
     'max_depth': [None, 5, 10],
     'min_samples_split': [2, 5, 10],
     'min_samples_leaf': [1, 2, 4],
-    'max_features': ['auto', 'sqrt', 'log2'],
+    'max_features': ['sqrt', 'log2'],
     'random_state': [None, 42]
 }, defaultCrossValidationNum),
 

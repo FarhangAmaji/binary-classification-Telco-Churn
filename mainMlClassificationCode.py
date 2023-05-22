@@ -26,7 +26,6 @@ if __name__ == '__main__':
         print(m1.name,'started',ti()-t0,'s')
         totResultsDf = pd.concat([totResultsDf, m1.fitModelAndGetResults(trainTestXY_,totResultsDf,parallel=envVars['parallel'])]).reset_index(drop=True)
         totResultsDf.to_csv(f'{csvFileName}.csv', index=False, header=True)
-        print(m1.name,'finished',ti()-t0,'s')
     print('lasted',ti()-t0,'s')
 #%% 
 

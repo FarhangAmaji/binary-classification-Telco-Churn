@@ -5,13 +5,13 @@ os.chdir(base_folder)
 import itertools
 import multiprocessing
 from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor#jjj
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score,cohen_kappa_score
 from sklearn.model_selection import StratifiedKFold
 from utils import q,ti
 from envVarsPreprocess import envVars
 import traceback
-#kkk add option no to use cross validation
 #%%
 class trainTestXY:
     def __init__(self, xTrain, xTest, yTrain, yTest, xScaler, yScaler):
@@ -71,7 +71,6 @@ class modelEvaluator:
                 self.stratifiedKFold = StratifiedKFold(n_splits=self.crossValidationNum) if self.crossValidationNum>1 else None        
         
         resultsDf = pd.DataFrame()
-        #kkk add an option not to use cross validation
         inputArgs=[]
         
         #kkk separate the hyperParamRanges, totResultsDf.empty, parallel to their own funcs
@@ -85,7 +84,7 @@ class modelEvaluator:
                     for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)):
                         inputArgs.append([fold+1, data, model, hyperparameters, trainIndex, testIndex])
                 else:
-                    inputArgs.append(['noCrossVal', data, model, hyperparameters, list(range(len(data.xTrain))), []])#kkk check cross val in processFOld
+                    inputArgs.append(['noCrossVal', data, model, hyperparameters, list(range(len(data.xTrain))), []])
         else:
             model = self.modelFunc()
             if self.crossVal:
@@ -103,7 +102,7 @@ class modelEvaluator:
                     inputArgs.remove(ir)
                     
         if parallel:
-            with ThreadPoolExecutor(max_workers=max(multiprocessing.cpu_count() - 4, 1)) as executor:
+            with ProcessPoolExecutor(max_workers=max(multiprocessing.cpu_count() - 4, 1)) as executor:
                 try:
                     resultRows = list(executor.map(self.processFold, *zip(*inputArgs)))
                     resultsDf = pd.concat([resultsDf, *resultRows]).reset_index(drop=True)
@@ -116,8 +115,6 @@ class modelEvaluator:
         return resultsDf
     def processFold(self, fold, data, model, hyperparameters, trainIndex, testIndex):
         try:
-            if self.name=='RandomForestClassifier' and hyperparameters=={'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'}:
-                x=0
             q('processFold',fold, self.name, hyperparameters,ti(),filewrite=True)
             foldXTrain, foldXTest = data.xTrain[trainIndex], data.xTrain[testIndex]
             foldYTrain, foldYTest = data.yTrain[trainIndex], data.yTrain[testIndex]
