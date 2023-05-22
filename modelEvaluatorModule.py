@@ -9,6 +9,8 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score,cohen_kappa_score
 from sklearn.model_selection import StratifiedKFold
 from utils import q,ti
+from envVarsPreprocess import envVars
+import traceback
 #kkk add option no to use cross validation
 #%%
 class trainTestXY:
@@ -41,7 +43,7 @@ class modelEvaluator:
         self.hyperParamRanges = hyperParamRanges
         self.crossValidationNum = crossValidationNum
         self.crossVal = self.crossValidationNum >= 2
-        self.stratifiedKFold = StratifiedKFold(n_splits=crossValidationNum) if self.crossValidationNum>1 else None
+        self.stratifiedKFold = StratifiedKFold(n_splits=crossValidationNum) if crossValidationNum>1 else None
         self.scoring = {
             'accuracy': accuracy_score,
             'precision': precision_score,
@@ -56,8 +58,18 @@ class modelEvaluator:
         if self.crossVal:
             self.colsOrder.extend(['trainAccuracy', 'trainPrecision', 'trainRecall', 'trainF1', 'trainRocauc', 'trainCohenkappascore'])
 
-    def fitModelAndGetResults(self, data,totResultsDf=None, parallel=True):
+    def fitModelAndGetResults(self, data,totResultsDf=None, parallel=True, paramCheckMode=envVars['paramCheckMode']):
         print(f'started fitting {self.name}')
+        if paramCheckMode:
+            if self.hyperParamRanges:
+                for key, value in self.hyperParamRanges.items():
+                    if any(isinstance(item, (int, float)) for item in value):
+                        self.hyperParamRanges[key] = [item for item in value if isinstance(item, (int, float))][:1]
+            
+            if self.crossVal:
+                self.crossValidationNum = 2
+                self.stratifiedKFold = StratifiedKFold(n_splits=self.crossValidationNum) if self.crossValidationNum>1 else None        
+        
         resultsDf = pd.DataFrame()
         #kkk add an option not to use cross validation
         inputArgs=[]
@@ -84,11 +96,12 @@ class modelEvaluator:
         
         # check if the inputArgs are not in the totResultsDf
         if not totResultsDf.empty:
-            for ir in inputArgs:
-                if ((totResultsDf['model'] == self.name).any() and  (totResultsDf['Parameter Set'] == ir[3]).any()
-                    and (totResultsDf['Fold'] == ir[0]).any()):
+            for irI in range(len(inputArgs)-1,-1,-1):
+                ir=inputArgs[irI]
+                if not totResultsDf[(totResultsDf['model'] == self.name) & (totResultsDf['Parameter Set'] == str(ir[3]))
+                    & (totResultsDf['Fold'] == ir[0])].empty:
                     inputArgs.remove(ir)
-        
+                    
         if parallel:
             with ThreadPoolExecutor(max_workers=max(multiprocessing.cpu_count() - 4, 1)) as executor:
                 try:
@@ -103,11 +116,16 @@ class modelEvaluator:
         return resultsDf
     def processFold(self, fold, data, model, hyperparameters, trainIndex, testIndex):
         try:
+            if self.name=='RandomForestClassifier' and hyperparameters=={'n_estimators': 50, 'criterion': 'gini', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'}:
+                x=0
             q('processFold',fold, self.name, hyperparameters,ti(),filewrite=True)
             foldXTrain, foldXTest = data.xTrain[trainIndex], data.xTrain[testIndex]
             foldYTrain, foldYTest = data.yTrain[trainIndex], data.yTrain[testIndex]
     
-            fitted_model = model.fit(foldXTrain, foldYTrain)
+            try:
+                fitted_model = model.fit(foldXTrain, foldYTrain.ravel())
+            except Exception as e:
+                q('fitted_model Errrrrrr',fold, self.name, hyperparameters,'time:',ti(),'\nerrrr:',e,'\ntraceback:',traceback.format_exc(),'\nfoldXTrain:',type(foldXTrain),foldXTrain,'\nfoldYTrain.ravel():',type(foldYTrain.ravel()),foldYTrain.ravel(),'\n',filewrite=True,filename='fitted_modelErrrr')
             scores = {'model': self.name, 'Parameter Set': str(hyperparameters), 'Fold': fold}
     
             predicteds = [predictedY('test', fitted_model.predict(data.xTest), data.yTest)]
@@ -120,5 +138,5 @@ class modelEvaluator:
             dfRow = pd.DataFrame(scores, index=[0])[self.colsOrder]
             return dfRow
         except Exception as e:
-            q('processFold Errrrrrr',fold, self.name, hyperparameters,'errrr',e,ti(),filewrite=True,filename='processFoldErrr')
+            q('processFold Errrrrrr',fold, self.name, hyperparameters,'time:',ti(),'\nerrrr:',e,'\ntraceback:',traceback.format_exc(),'\n',filewrite=True,filename='processFoldErrr')
             return pd.DataFrame()
