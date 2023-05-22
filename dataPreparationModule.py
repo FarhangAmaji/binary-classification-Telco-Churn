@@ -1,11 +1,14 @@
 #%% imports
 import os
+base_folder = os.path.dirname(os.path.abspath(__file__))
+os.chdir(base_folder)
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import MinMaxScaler
 
+from envVarsPreprocess import envVars
 from modelEvaluatorModule import trainTestXY
 #%% load data
 def loadData(baseFolder):
@@ -159,7 +162,7 @@ def performUpsampling(xTrain, yTrain,doUpSampling=False):
         return xTrainSampled, yTrainSampled
     return xTrain, yTrain
 #%% 
-def dataPreparation(doUpSampling=False,criticalOutlierColsForARow=1):
+def dataPreparation(doUpSampling=envVars["upSampling"],criticalOutlierColsForARow=1):
     # change dir to current dir
     baseFolder = os.path.dirname(os.path.abspath(__file__))
     os.chdir(baseFolder)

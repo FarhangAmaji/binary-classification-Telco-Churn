@@ -8,12 +8,13 @@ os.chdir(base_folder)
 from dataPreparationModule import dataPreparation
 from modelEvaluatorModule import modelEvaluator
 from modelConfigs import allModelConfigs
+from envVarsPreprocess import envVars
 from utils import q,ti
 #%% 
-telcoChurn, trainTestXY_ = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
+telcoChurn, trainTestXY_ = dataPreparation(criticalOutlierColsForARow=1)
 #%%
 t0=ti()
-csvFileName='noUpsamplingChurnTotResultsDf5cv'#kkk make cv num and upSampling dynamic
+csvFileName=envVars['csvFileName']
 if os.path.exists(f'{csvFileName}.csv'):
     totResultsDf = pd.read_csv(f'{csvFileName}.csv')
 else:    

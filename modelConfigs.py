@@ -5,6 +5,7 @@ base_folder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(base_folder)
 
 from modelEvaluatorModule import modelEvaluator,trainTestXY
+from envVarsPreprocess import envVars
 
 from xgboost import XGBClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -49,7 +50,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.svm import SVC #kkk took so long check it later
 #kkk add lgbm
 #%%
-defaultCrossValidationNum = 1#kkk change it back to 5
+defaultCrossValidationNum = envVars['crossValNum']#kkk change it back to 5
 allModelConfigs = [
     # # xgboost
     modelEvaluator(

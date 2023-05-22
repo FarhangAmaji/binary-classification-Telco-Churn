@@ -40,7 +40,7 @@ class modelEvaluator:
         self.modelFunc = modelFunc
         self.hyperParamRanges = hyperParamRanges
         self.crossValidationNum = crossValidationNum
-        self.crossVal = False if self.crossValidationNum<2 else True
+        self.crossVal = self.crossValidationNum >= 2
         self.stratifiedKFold = StratifiedKFold(n_splits=crossValidationNum) if self.crossValidationNum>1 else None
         self.scoring = {
             'accuracy': accuracy_score,
@@ -51,9 +51,10 @@ class modelEvaluator:
             'cohenKappaScore': cohen_kappa_score
         }
         self.colsOrder = ['model', 'Parameter Set', 'Fold', 'testAccuracy', 'testPrecision', 'testRecall', 
-        'testF1', 'testRocauc','testCohenkappascore','trainAccuracy', 'trainPrecision',
-        'trainRecall', 'trainF1', 'trainRocauc', 'trainCohenkappascore', ] if self.crossVal else ['model', 'Parameter Set',
-         'Fold', 'testAccuracy', 'testPrecision', 'testRecall', 'testF1', 'testRocauc','testCohenkappascore' ]
+            'testF1', 'testRocauc', 'testCohenkappascore']
+        
+        if self.crossVal:
+            self.colsOrder.extend(['trainAccuracy', 'trainPrecision', 'trainRecall', 'trainF1', 'trainRocauc', 'trainCohenkappascore'])
 
     def fitModelAndGetResults(self, data,totResultsDf=None, parallel=True):
         print(f'started fitting {self.name}')
@@ -116,8 +117,8 @@ class modelEvaluator:
             for predicted in predicteds:
                 scores.update(predicted.getScores(self.scoring))
             
-            df_row = pd.DataFrame(scores, index=[0])[self.colsOrder]
-            return df_row
+            dfRow = pd.DataFrame(scores, index=[0])[self.colsOrder]
+            return dfRow
         except Exception as e:
             q('processFold Errrrrrr',fold, self.name, hyperparameters,'errrr',e,ti(),filewrite=True,filename='processFoldErrr')
             return pd.DataFrame()
