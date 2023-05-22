@@ -4,6 +4,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.preprocessing import MinMaxScaler
+
+from modelEvaluatorModule import trainTestXY
 #%% load data
 def loadData(baseFolder):
     filePath = os.path.join(baseFolder, 'WA_Fn-UseC_-Telco-Customer-Churn.csv')
@@ -112,13 +115,27 @@ def removeOutliersWithIQR(telcoChurn,numericCols,criticalOutlierColsForARow):
     telcoChurn=telcoChurn.drop(multipleOutliers).reset_index(drop=True)
     'this dataset didnt have outliers if it had we had shown the boxplots once more'
     return telcoChurn
+#%% reshapeArraysDimensions
+def reshapeArraysDimensions(npArray):
+    if len(npArray.shape)==1:
+        npArray=np.reshape(npArray, (-1, 1))
+    assert len(npArray.shape)==2,'shape of npArray should be 2'
+    return npArray
+#%% x y scalers
+def xYScalers(xData, yData):
+    xScaler, yScaler = MinMaxScaler(), MinMaxScaler()
+    xData = xScaler.fit_transform(xData)
+    yData = yScaler.fit_transform(yData)
+    return xData, yData, xScaler, yScaler
 #%% sec: train_test_split
-def splitTrainTest(telcoChurn):
+def splitXY(telcoChurn,yCols):
+    xData = telcoChurn.drop(columns=yCols)
+    yData = telcoChurn.loc[:,yCols]
+    return list(map(reshapeArraysDimensions, [xData.values, yData.values]))
+def splitTrainTest(xData, yData,test_size=0.2):
     from sklearn.model_selection import train_test_split
-    xData = telcoChurn.drop('Churn',axis=1).values
-    yData = telcoChurn.Churn.values
     # spliting the data into test and train
-    xTrain, xTest , yTrain, yTest = train_test_split(xData, yData , test_size=0.2, random_state=0)
+    xTrain, xTest , yTrain, yTest = train_test_split(xData, yData , test_size=test_size, random_state=0)
     return xTrain, xTest , yTrain, yTest
 #%% sec: imbalance
 def showClassImbalance(classOfOutput,df):
@@ -166,16 +183,18 @@ def dataPreparation(doUpSampling=False,criticalOutlierColsForARow=1):
     plotBoxplotsForOutliers(numericCols,'Churn',telcoChurn)
     telcoChurn = removeOutliersWithIQR(telcoChurn,numericCols,criticalOutlierColsForARow)
     
-    xTrain, xTest , yTrain, yTest = splitTrainTest(telcoChurn)
+    xData, yData = splitXY(telcoChurn,['Churn'])
+    xData, yData, xScaler, yScaler = xYScalers(xData, yData)
+    xTrain, xTest , yTrain, yTest = splitTrainTest(xData, yData)
     
     showClassImbalance('Churn',telcoChurn)
     xTrain, yTrain = performUpsampling(xTrain, yTrain,doUpSampling=doUpSampling)
-    return telcoChurn, xTrain, xTest , yTrain, yTest
+    
+    trainTestXY_ = trainTestXY(xTrain, xTest , yTrain, yTest, xScaler, yScaler)
+    return telcoChurn, trainTestXY_
 #%% 
 if __name__ == '__main__':
     telcoChurn, xTrain, xTest , yTrain, yTest = dataPreparation(doUpSampling=False,criticalOutlierColsForARow=1)
-#%% 
-# telcoChurn, xTrain, xTest , yTrain, yTest = dataPreparation(doUpSampling=False,criticalOutlierColsForARow=1)
 #%% 
 
 #%% 

@@ -1494,3 +1494,7 @@ processFold 4 RandomForestClassifier {'n_estimators': 100, 'criterion': 'gini', 
 processFold 0 RandomForestClassifier {'n_estimators': 100, 'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684708727.6718056 
 processFold 1 RandomForestClassifier {'n_estimators': 100, 'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684708728.2572458 
 processFold 2 RandomForestClassifier {'n_estimators': 100, 'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt'} 1684708729.2660904 
+processFold 1 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684715134.6604755 
+processFold 2 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684715135.7966497 
+processFold 3 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684715136.8966498 
+processFold 4 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} 1684715138.0256524 

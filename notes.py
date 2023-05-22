@@ -37,6 +37,7 @@ steps to do:
             check if some model has lots of errors
             add confusion matrices
             add drawing of AUC-ROC Curve
+            add comments
             #kkk add subSteps later
         
         explain output data:

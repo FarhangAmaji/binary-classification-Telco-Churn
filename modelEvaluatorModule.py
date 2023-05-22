@@ -12,11 +12,13 @@ from utils import q,ti
 #kkk add option no to use cross validation
 #%%
 class trainTestXY:
-    def __init__(self, xTrain, xTest, yTrain, yTest):
+    def __init__(self, xTrain, xTest, yTrain, yTest, xScaler, yScaler):
         self.xTrain = xTrain
         self.xTest = xTest
         self.yTrain = yTrain
         self.yTest = yTest
+        self.xScaler = xScaler
+        self.yScaler = yScaler
 
 
 class predictedY:
@@ -48,14 +50,13 @@ class modelEvaluator:
             'cohenKappaScore': cohen_kappa_score
         }
 
-    def fitModelAndGetResults(self, data,totResultsDf=None parallel=True):
+    def fitModelAndGetResults(self, data,totResultsDf=None, parallel=True):
         print(f'started fitting {self.name}')
         resultsDf = pd.DataFrame()
-        #kkk add an option if the params are in some fileSaved dont do the function
         #kkk add an option not to use cross validation
-        
         inputArgs=[]
         
+        #kkk separate the hyperParamRanges, totResultsDf.empty, parallel to their own funcs
         if self.hyperParamRanges:
             paramCombinations = list(itertools.product(*self.hyperParamRanges.values()))
             for params in paramCombinations:
@@ -63,16 +64,17 @@ class modelEvaluator:
                 model = self.modelFunc(**hyperparameters)
                 
                 for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)):
-                    inputArgs.append([fold, data, model, hyperparameters, trainIndex, testIndex])
+                    inputArgs.append([fold+1, data, model, hyperparameters, trainIndex, testIndex])
         else:
             model = self.modelFunc()
             for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)):
-                inputArgs.append([fold, data, model, '', trainIndex, testIndex])
+                inputArgs.append([fold+1, data, model, '', trainIndex, testIndex])
         
         # check if the inputArgs are not in the totResultsDf
-        if totResultsDf:
+        if not totResultsDf.empty:
             for ir in inputArgs:
-                if ((totResultsDf['model'] == self.name) & (totResultsDf['Parameter Set'] == inputArgs[3]) & (totResultsDf['Fold'] == inputArgs[0])).any():
+                if ((totResultsDf['model'] == self.name).any() and  (totResultsDf['Parameter Set'] == ir[3]).any()
+                    and (totResultsDf['Fold'] == ir[0]).any()):
                     inputArgs.remove(ir)
         
         if parallel:
@@ -94,7 +96,7 @@ class modelEvaluator:
             foldYTrain, foldYTest = data.yTrain[trainIndex], data.yTrain[testIndex]
     
             fitted_model = model.fit(foldXTrain, foldYTrain)
-            scores = {'model': self.name, 'Parameter Set': str(hyperparameters), 'Fold': fold + 1}
+            scores = {'model': self.name, 'Parameter Set': str(hyperparameters), 'Fold': fold}
     
             predicteds = [
                 predictedY('train', fitted_model.predict(foldXTest), foldYTest),
