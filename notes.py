@@ -32,9 +32,9 @@ steps to do:
             #done add scaler
             #done add option for not using cross validation
             #done add env variables
-            add other models like lgbm+hyperparams
-            do minimal model for hyperparams check and revise hyperparams
-            check if some model has lots of errors
+            #done add other models like lgbm+hyperparams
+            #done do minimal model for hyperparams check and revise hyperparams
+            #done check if some model has lots of errors
             add confusion matrices
             add drawing of AUC-ROC Curve
             add comments

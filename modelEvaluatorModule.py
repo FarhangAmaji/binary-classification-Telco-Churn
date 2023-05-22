@@ -3,9 +3,7 @@ import os
 base_folder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(base_folder)
 import itertools
-import multiprocessing
-from concurrent.futures import ThreadPoolExecutor
-from concurrent.futures import ProcessPoolExecutor#jjj
+
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score,cohen_kappa_score
 from sklearn.model_selection import StratifiedKFold
@@ -58,8 +56,7 @@ class modelEvaluator:
         if self.crossVal:
             self.colsOrder.extend(['trainAccuracy', 'trainPrecision', 'trainRecall', 'trainF1', 'trainRocauc', 'trainCohenkappascore'])
 
-    def fitModelAndGetResults(self, data,totResultsDf=None, parallel=True, paramCheckMode=envVars['paramCheckMode']):
-        print(f'started fitting {self.name}')
+    def getInputArgs(self, data,totResultsDf=None, paramCheckMode=envVars['paramCheckMode']):
         if paramCheckMode:
             if self.hyperParamRanges:
                 for key, value in self.hyperParamRanges.items():
@@ -73,7 +70,7 @@ class modelEvaluator:
         resultsDf = pd.DataFrame()
         inputArgs=[]
         
-        #kkk separate the hyperParamRanges, totResultsDf.empty, parallel to their own funcs
+        #kkk separate the paramCheckMode, hyperParamRanges, totResultsDf.empty to their own funcs
         if self.hyperParamRanges:
             paramCombinations = list(itertools.product(*self.hyperParamRanges.values()))
             for params in paramCombinations:
@@ -100,29 +97,14 @@ class modelEvaluator:
                 if not totResultsDf[(totResultsDf['model'] == self.name) & (totResultsDf['Parameter Set'] == str(ir[3]))
                     & (totResultsDf['Fold'] == ir[0])].empty:
                     inputArgs.remove(ir)
-                    
-        if parallel:
-            with ProcessPoolExecutor(max_workers=max(multiprocessing.cpu_count() - 4, 1)) as executor:
-                try:
-                    resultRows = list(executor.map(self.processFold, *zip(*inputArgs)))
-                    resultsDf = pd.concat([resultsDf, *resultRows]).reset_index(drop=True)
-                except Exception as e:
-                    print('ThreadPoolExecutor errrr', e)
-        else:
-            for ir in inputArgs:
-                resultRows = self.processFold(*ir)
-                resultsDf = pd.concat([resultsDf, resultRows]).reset_index(drop=True)
-        return resultsDf
+        return [[self,*ir] for ir in inputArgs]
     def processFold(self, fold, data, model, hyperparameters, trainIndex, testIndex):
         try:
             q('processFold',fold, self.name, hyperparameters,ti(),filewrite=True)
             foldXTrain, foldXTest = data.xTrain[trainIndex], data.xTrain[testIndex]
             foldYTrain, foldYTest = data.yTrain[trainIndex], data.yTrain[testIndex]
     
-            try:
-                fitted_model = model.fit(foldXTrain, foldYTrain.ravel())
-            except Exception as e:
-                q('fitted_model Errrrrrr',fold, self.name, hyperparameters,'time:',ti(),'\nerrrr:',e,'\ntraceback:',traceback.format_exc(),'\nfoldXTrain:',type(foldXTrain),foldXTrain,'\nfoldYTrain.ravel():',type(foldYTrain.ravel()),foldYTrain.ravel(),'\n',filewrite=True,filename='fitted_modelErrrr')
+            fitted_model = model.fit(foldXTrain, foldYTrain.ravel())
             scores = {'model': self.name, 'Parameter Set': str(hyperparameters), 'Fold': fold}
     
             predicteds = [predictedY('test', fitted_model.predict(data.xTest), data.yTest)]
