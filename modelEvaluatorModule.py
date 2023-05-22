@@ -40,7 +40,8 @@ class modelEvaluator:
         self.modelFunc = modelFunc
         self.hyperParamRanges = hyperParamRanges
         self.crossValidationNum = crossValidationNum
-        self.stratifiedKFold = StratifiedKFold(n_splits=crossValidationNum)
+        self.crossVal = False if self.crossValidationNum<2 else True
+        self.stratifiedKFold = StratifiedKFold(n_splits=crossValidationNum) if self.crossValidationNum>1 else None
         self.scoring = {
             'accuracy': accuracy_score,
             'precision': precision_score,
@@ -49,6 +50,10 @@ class modelEvaluator:
             'rocAuc': roc_auc_score,
             'cohenKappaScore': cohen_kappa_score
         }
+        self.colsOrder = ['model', 'Parameter Set', 'Fold', 'testAccuracy', 'testPrecision', 'testRecall', 
+        'testF1', 'testRocauc','testCohenkappascore','trainAccuracy', 'trainPrecision',
+        'trainRecall', 'trainF1', 'trainRocauc', 'trainCohenkappascore', ] if self.crossVal else ['model', 'Parameter Set',
+         'Fold', 'testAccuracy', 'testPrecision', 'testRecall', 'testF1', 'testRocauc','testCohenkappascore' ]
 
     def fitModelAndGetResults(self, data,totResultsDf=None, parallel=True):
         print(f'started fitting {self.name}')
@@ -63,12 +68,18 @@ class modelEvaluator:
                 hyperparameters = dict(zip(self.hyperParamRanges.keys(), params))
                 model = self.modelFunc(**hyperparameters)
                 
-                for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)):
-                    inputArgs.append([fold+1, data, model, hyperparameters, trainIndex, testIndex])
+                if self.crossVal:
+                    for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)):
+                        inputArgs.append([fold+1, data, model, hyperparameters, trainIndex, testIndex])
+                else:
+                    inputArgs.append(['noCrossVal', data, model, hyperparameters, list(range(len(data.xTrain))), []])#kkk check cross val in processFOld
         else:
             model = self.modelFunc()
-            for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)):
-                inputArgs.append([fold+1, data, model, '', trainIndex, testIndex])
+            if self.crossVal:
+                for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)):
+                    inputArgs.append([fold+1, data, model, '', trainIndex, testIndex])
+            else:
+                inputArgs.append(['noCrossVal', data, model, '', list(range(len(data.xTrain))), []])
         
         # check if the inputArgs are not in the totResultsDf
         if not totResultsDf.empty:
@@ -98,18 +109,14 @@ class modelEvaluator:
             fitted_model = model.fit(foldXTrain, foldYTrain)
             scores = {'model': self.name, 'Parameter Set': str(hyperparameters), 'Fold': fold}
     
-            predicteds = [
-                predictedY('train', fitted_model.predict(foldXTest), foldYTest),
-                predictedY('test', fitted_model.predict(data.xTest), data.yTest)
-            ]
+            predicteds = [predictedY('test', fitted_model.predict(data.xTest), data.yTest)]
+            if self.crossVal:
+                predicteds.append(predictedY('train', fitted_model.predict(foldXTest), foldYTest))
+            
             for predicted in predicteds:
                 scores.update(predicted.getScores(self.scoring))
-    
-            cols_order = [
-                'model', 'Parameter Set', 'Fold', 'testAccuracy', 'testPrecision', 'testRecall', 
-            'testF1', 'testRocauc','testCohenkappascore','trainAccuracy', 'trainPrecision',
-            'trainRecall', 'trainF1', 'trainRocauc', 'trainCohenkappascore', ]
-            df_row = pd.DataFrame(scores, index=[0])[cols_order]
+            
+            df_row = pd.DataFrame(scores, index=[0])[self.colsOrder]
             return df_row
         except Exception as e:
             q('processFold Errrrrrr',fold, self.name, hyperparameters,'errrr',e,ti(),filewrite=True,filename='processFoldErrr')

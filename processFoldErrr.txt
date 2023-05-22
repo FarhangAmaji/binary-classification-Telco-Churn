@@ -1120,3 +1120,7 @@ processFold Errrrrrr 2 RandomForestClassifier {'n_estimators': 100, 'criterion':
 processFold Errrrrrr 1 RandomForestClassifier {'n_estimators': 100, 'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'log2'} errrr 'int' object is not subscriptable 1684708717.750215 
 processFold Errrrrrr 4 RandomForestClassifier {'n_estimators': 100, 'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'log2'} errrr 'int' object is not subscriptable 1684708727.5671866 
 processFold Errrrrrr 3 RandomForestClassifier {'n_estimators': 100, 'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'log2'} errrr 'int' object is not subscriptable 1684708728.138783 
+processFold Errrrrrr 1 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} errrr  1684718408.0026307 
+processFold Errrrrrr 2 xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} errrr  1684718408.835083 
+processFold Errrrrrr noCrossVal xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 450} errrr  1684718841.20863 
+processFold Errrrrrr noCrossVal xgboost {'learning_rate': 0.01, 'subsample': 0.8, 'colsample_bytree': 0.8, 'n_estimators': 500} errrr  1684718842.1036162 

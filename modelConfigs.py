@@ -49,8 +49,8 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.svm import SVC #kkk took so long check it later
 #kkk add lgbm
 #%%
-defaultCrossValidationNum = 5#kkk change it back to 5
-allModelConfigss = [
+defaultCrossValidationNum = 1#kkk change it back to 5
+allModelConfigs = [
     # # xgboost
     modelEvaluator(
         'xgboost',

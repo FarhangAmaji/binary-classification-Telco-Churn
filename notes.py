@@ -30,7 +30,7 @@ steps to do:
             #done handle without hyperparam modelEvaluation
             #done add an option if the params are in some fileSaved dont do the function
             #done add scaler
-            add option for not using cross validation
+            #done add option for not using cross validation
             add other models like lgbm
             do minimal model for hyperparams check and revise hyperparams
             separate the modelEval for a single model and (xFold data) now its named processFold but rename it and make it better

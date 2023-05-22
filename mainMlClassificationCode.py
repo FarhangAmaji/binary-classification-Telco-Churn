@@ -7,19 +7,19 @@ os.chdir(base_folder)
 
 from dataPreparationModule import dataPreparation
 from modelEvaluatorModule import modelEvaluator
-from modelConfigs import allModelConfigss
+from modelConfigs import allModelConfigs
 from utils import q,ti
 #%% 
 telcoChurn, trainTestXY_ = dataPreparation(doUpSampling=False, criticalOutlierColsForARow=1)
 #%%
 t0=ti()
-csvFileName='noUpsamplingChurnTotResultsDf5cv'
+csvFileName='noUpsamplingChurnTotResultsDf5cv'#kkk make cv num and upSampling dynamic
 if os.path.exists(f'{csvFileName}.csv'):
     totResultsDf = pd.read_csv(f'{csvFileName}.csv')
 else:    
     totResultsDf = pd.DataFrame()
 if __name__ == '__main__':
-    for m1 in allModelConfigss:
+    for m1 in allModelConfigs:
         print(m1.name,'started',ti()-t0,'s')
         totResultsDf = pd.concat([totResultsDf, m1.fitModelAndGetResults(trainTestXY_,totResultsDf,parallel=False)])
         totResultsDf.to_csv(f'{csvFileName}.csv', index=False, header=True)
