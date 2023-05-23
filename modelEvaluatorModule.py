@@ -1,7 +1,7 @@
 #%% imports
 import os
-base_folder = os.path.dirname(os.path.abspath(__file__))
-os.chdir(base_folder)
+baseFolder = os.path.dirname(os.path.abspath(__file__))
+os.chdir(baseFolder)
 import itertools
 
 import pandas as pd
@@ -57,48 +57,61 @@ class modelEvaluator:
         if self.crossVal:
             self.colsOrder.extend(['trainAccuracy', 'trainPrecision', 'trainRecall', 'trainF1', 'trainRocauc', 'trainCohenkappascore'])
 
-    def getInputArgs(self, totResultsDf=None, paramCheckMode=envVars['paramCheckMode']):
-        #kkk may shrink trainIndex, testIndex which are list of (indexes)integers to ranges and numbers with a func and a func to get back
-        if paramCheckMode:
-            if self.hyperParamRanges:
-                for key, value in self.hyperParamRanges.items():
-                    if any(isinstance(item, (int, float)) for item in value):
-                        self.hyperParamRanges[key] = [item for item in value if isinstance(item, (int, float))][:1]
-            
-            if self.crossVal:
-                self.crossValidationNum = 2
-                self.stratifiedKFold = StratifiedKFold(n_splits=self.crossValidationNum) if self.crossValidationNum>1 else None        
-        
-        inputArgs=[]
-        
-        #kkk separate the paramCheckMode, hyperParamRanges, totResultsDf.empty to their own funcs
+    def shrinkParamRanges(self):
+        if self.hyperParamRanges:
+            for key, value in self.hyperParamRanges.items():
+                if any(isinstance(item, (int, float)) for item in value):
+                    self.hyperParamRanges[key] = [item for item in value if isinstance(item, (int, float))][:1]
+
+    def updateCrossValidation(self):
+        if self.crossVal:
+            self.crossValidationNum = 2
+            self.stratifiedKFold = StratifiedKFold(n_splits=self.crossValidationNum) if self.crossValidationNum > 1 else None
+
+    def generateInputArgs(self):
+        inputArgs = []
+
         if self.hyperParamRanges:
             paramCombinations = list(itertools.product(*self.hyperParamRanges.values()))
             for params in paramCombinations:
                 hyperparameters = dict(zip(self.hyperParamRanges.keys(), params))
                 model = self.modelFunc(**hyperparameters)
-                
+
                 if self.crossVal:
-                    for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(self.data.xTrain, self.data.yTrain)):
-                        inputArgs.append([fold+1, model, hyperparameters, trainIndex, testIndex])
+                    for fold, (trainIndex, testIndex) in enumerate(
+                            self.stratifiedKFold.split(self.data.xTrain, self.data.yTrain)):
+                        inputArgs.append([fold + 1, model, hyperparameters, trainIndex, testIndex])
                 else:
                     inputArgs.append(['noCrossVal', model, hyperparameters, list(range(len(self.data.xTrain))), []])
         else:
             model = self.modelFunc()
             if self.crossVal:
-                for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(self.data.xTrain, self.data.yTrain)):
-                    inputArgs.append([fold+1, model, '', trainIndex, testIndex])
+                for fold, (trainIndex, testIndex) in enumerate(
+                        self.stratifiedKFold.split(self.data.xTrain, self.data.yTrain)):
+                    inputArgs.append([fold + 1, model, '', trainIndex, testIndex])
             else:
                 inputArgs.append(['noCrossVal', model, '', list(range(len(self.data.xTrain))), []])
-        
-        # check if the inputArgs are not in the totResultsDf
+
+        return inputArgs
+
+    def preventDuplicateInputArgs(self, inputArgs, totResultsDf):
         if not totResultsDf.empty:
-            thisModelTotResultsDf=totResultsDf[(totResultsDf['model'] == self.name)]
-            for irI in range(len(inputArgs)-1,-1,-1):
-                ir=inputArgs[irI]
-                if not thisModelTotResultsDf[(thisModelTotResultsDf['Parameter Set'] == str(ir[3])) & (thisModelTotResultsDf['Fold'] == ir[0])].empty:
+            thisModelTotResultsDf = totResultsDf[(totResultsDf['model'] == self.name)]
+            for irI in range(len(inputArgs) - 1, -1, -1):
+                ir = inputArgs[irI]
+                if not thisModelTotResultsDf[
+                    (thisModelTotResultsDf['Parameter Set'] == str(ir[3])) & (thisModelTotResultsDf['Fold'] == ir[0])].empty:
                     inputArgs.remove(ir)
-        return [self,inputArgs]
+
+    def getInputArgs(self, totResultsDf=None, paramCheckMode=envVars['paramCheckMode']):
+        if paramCheckMode:
+            self.shrinkParamRanges()
+            self.updateCrossValidation()
+
+        inputArgs = self.generateInputArgs()
+        self.preventDuplicateInputArgs(inputArgs, totResultsDf)
+
+        return [self, inputArgs]
     def fitModelAndGetResults(self, fold, model, hyperparameters, trainIndex, testIndex):
         try:
             q('fitModelAndGetResults',fold, self.name, hyperparameters,ti(),filewrite=True)

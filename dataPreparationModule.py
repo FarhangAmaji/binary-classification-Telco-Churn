@@ -1,7 +1,7 @@
 #%% imports
 import os
-base_folder = os.path.dirname(os.path.abspath(__file__))
-os.chdir(base_folder)
+baseFolder = os.path.dirname(os.path.abspath(__file__))
+os.chdir(baseFolder)
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt

@@ -1,8 +1,8 @@
 #%% imports
 import os
 import pandas as pd
-base_folder = os.path.dirname(os.path.abspath(__file__))
-os.chdir(base_folder)
+baseFolder = os.path.dirname(os.path.abspath(__file__))
+os.chdir(baseFolder)
 
 from modelEvaluatorModule import modelEvaluator,trainTestXY
 from dataPreparationModule import dataPreparation

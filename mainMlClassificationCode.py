@@ -3,9 +3,8 @@ import os
 import pandas as pd
 from concurrent.futures import ProcessPoolExecutor
 import multiprocessing
-base_folder = os.path.dirname(os.path.abspath(__file__))
-os.chdir(base_folder)
-
+baseFolder = os.path.dirname(os.path.abspath(__file__))
+os.chdir(baseFolder)
 
 from modelConfigs import allModelConfigs
 from envVarsPreprocess import envVars
