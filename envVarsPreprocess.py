@@ -1,8 +1,8 @@
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score,cohen_kappa_score
-envVars={'crossValNum':0,
-         'upSampling':False,
-         'parallel':True,
-         'paramCheckMode':False
+envVars={'crossValNum':0, #0 and 1 are for noCrossVal
+         'upSampling':False,#to cure imbalancing of data
+         'parallel':True,#cpu parallelization for potentially get faster results
+         'paramCheckMode':False#its recommended when u want to add new modelConfig
          }
 
 if envVars["crossValNum"] < 2:
