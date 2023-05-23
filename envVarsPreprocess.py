@@ -1,7 +1,7 @@
-envVars={'crossValNum':2,
+envVars={'crossValNum':0,
          'upSampling':False,
          'parallel':True,
-         'paramCheckMode':True
+         'paramCheckMode':False
          }
 
 if envVars["crossValNum"] < 2:

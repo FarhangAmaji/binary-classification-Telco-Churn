@@ -5,6 +5,7 @@ base_folder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(base_folder)
 
 from modelEvaluatorModule import modelEvaluator,trainTestXY
+from dataPreparationModule import dataPreparation
 from envVarsPreprocess import envVars
 
 from xgboost import XGBClassifier
@@ -49,22 +50,23 @@ from sklearn.linear_model import RidgeClassifierCV
 from sklearn.linear_model import SGDClassifier
 from sklearn.svm import SVC #kkk took so long check it later
 from lightgbm import LGBMClassifier
-#kkk add lgbm
+#%% 
+telcoChurn, trainTestXY_ = dataPreparation(criticalOutlierColsForARow=1)
 #%%
+#kkk the data preparation may be moved here
 defaultCrossValidationNum = envVars['crossValNum']#kkk change it back to 5
 allModelConfigs = [
     ## lgbm
-    modelEvaluator('LGBMClassifier', LGBMClassifier, {
+    modelEvaluator('LGBMClassifier', LGBMClassifier, trainTestXY_,{
         'boosting_type': ['gbdt', 'dart', 'goss'],
-        'num_leaves': [31, 50, 100, 200],
-        'learning_rate': [0.001, 0.01, 0.1],
-        'n_estimators': [100, 500, 1000],
-        'max_depth': [-1, 5, 10, 20],
-        'min_child_samples': [1, 10, 20, 50],
-        'subsample': [0.5, 0.8, 1.0],
-        'colsample_bytree': [0.5, 0.8, 1.0],
-        'reg_alpha': [0.0, 0.1, 0.5, 1.0],
-        'reg_lambda': [0.0, 0.1, 0.5, 1.0]
+        'num_leaves': [50, 100],
+        'learning_rate': [0.01, 0.05],
+        'n_estimators': [150, 300],
+        'max_depth': [-1, 5, 10],
+        'min_child_samples': [5, 10],
+        'subsample': [0.5, 0.8],
+        'colsample_bytree': [0.5, 0.8],
+        'reg_alpha': [0.1, 0.5],
     }, defaultCrossValidationNum),
 
 
@@ -72,27 +74,35 @@ allModelConfigs = [
     modelEvaluator(
         'xgboost',
         XGBClassifier,
-        {
-            'learning_rate': [0.01, 0.02],
-            'subsample': [0.8, 1],
-            'colsample_bytree': [0.8, 1],
-            'n_estimators': [450, 500]
-        },
+        trainTestXY_,{
+    'max_depth': [4, 8, 25],
+    'learning_rate': [0.05, 0.01,0.3],
+    'n_estimators': [150, 300,400],
+    "eval_metric" : ['auc'],
+    'use_label_encoder':[False],
+    "random_state" : [42],
+    "objective" : ['binary:logistic'],
+    'subsample': [0.8, 1],
+    'colsample_bytree': [0.8, 0.9, 1.0],
+    'reg_alpha': [0, 0.1, 0.5],
+    'min_child_weight': [2, 5]
+},
         defaultCrossValidationNum
     ),
     
     #RandomForestClassifier
-    modelEvaluator('RandomForestClassifier', RandomForestClassifier, {
-    'n_estimators': [50, 100, 200, 500],
+    modelEvaluator('RandomForestClassifier', RandomForestClassifier, trainTestXY_,{
+    'n_estimators': [50, 100, 200],#, 500
     'criterion': ['gini', 'entropy'],
-    'max_depth': [None, 5, 10, 20],
-    'min_samples_split': [2, 5, 10],
+    'max_depth': [5, 10, 20],#None, 
+    'min_samples_split': [2, 4,5, 10],
     'min_samples_leaf': [1, 2, 4],
-    'max_features': ['sqrt', 'log2']}, defaultCrossValidationNum),
+    'max_features': ['sqrt', 'log2'],
+    'random_state':[42]}, defaultCrossValidationNum),
     
     
     # DecisionTreeClassifier
-    modelEvaluator('DecisionTreeClassifier', DecisionTreeClassifier, {
+    modelEvaluator('DecisionTreeClassifier', DecisionTreeClassifier, trainTestXY_,{
     'criterion': ['gini', 'entropy'],
     'max_depth': [None, 5, 10, 20],
     'min_samples_split': [2, 5, 10],
@@ -101,7 +111,7 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     #AdaBoostClassifier
-    modelEvaluator('AdaBoostClassifier', AdaBoostClassifier,  {
+    modelEvaluator('AdaBoostClassifier', AdaBoostClassifier,  trainTestXY_,{
     'estimator': [DecisionTreeClassifier(max_depth=1), DecisionTreeClassifier(max_depth=2)],
     'n_estimators': [50, 100, 200, 500],
     'learning_rate': [0.1, 0.5, 1.0],
@@ -109,7 +119,7 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     ## BaggingClassifier
-    modelEvaluator('BaggingClassifier', BaggingClassifier,  {
+    modelEvaluator('BaggingClassifier', BaggingClassifier,  trainTestXY_,{
     'estimator': [DecisionTreeClassifier(max_depth=1), DecisionTreeClassifier(max_depth=2)],
     'n_estimators': [10, 50, 100, 200],
     'max_samples': [0.5, 0.7, 1.0],
@@ -119,11 +129,11 @@ allModelConfigs = [
     
     
     # BernoulliNB
-    modelEvaluator('BernoulliNB', BernoulliNB,  {
+    modelEvaluator('BernoulliNB', BernoulliNB,  trainTestXY_,{
     'alpha': [0.0, 0.5, 1.0, 2.0]}, defaultCrossValidationNum),
 
     # LogisticRegression
-    modelEvaluator('LogisticRegression', LogisticRegression, {
+    modelEvaluator('LogisticRegression', LogisticRegression, trainTestXY_,{
     'penalty': ['l1', 'l2'],
     'C': [0.001, 0.01, 0.1, 1, 10],
     'solver': ['liblinear', 'saga'],
@@ -132,20 +142,20 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
 
     # ComplementNB
-    modelEvaluator('ComplementNB', ComplementNB, {
+    modelEvaluator('ComplementNB', ComplementNB, trainTestXY_,{
     'alpha': [0.1, 0.5, 1.0],
     'fit_prior': [True, False],
     'norm': [True, False]
 }, defaultCrossValidationNum),
 
     # DummyClassifier
-    modelEvaluator('DummyClassifier', DummyClassifier, {
+    modelEvaluator('DummyClassifier', DummyClassifier, trainTestXY_,{
     'strategy': ['stratified', 'most_frequent', 'prior', 'uniform'],
     'random_state': [None, 42]
 }, defaultCrossValidationNum),
 
     # ExtraTreeClassifier
-    modelEvaluator('ExtraTreeClassifier', ExtraTreeClassifier, {
+    modelEvaluator('ExtraTreeClassifier', ExtraTreeClassifier, trainTestXY_,{
     'criterion': ['gini', 'entropy'],
     'max_depth': [None, 5, 10],
     'min_samples_split': [2, 5, 10],
@@ -155,48 +165,48 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
 
     # ExtraTreesClassifier
-    modelEvaluator('ExtraTreesClassifier', ExtraTreesClassifier, {
-    'n_estimators': [100, 200, 300],
+    modelEvaluator('ExtraTreesClassifier', ExtraTreesClassifier, trainTestXY_,{
+    'n_estimators': [100, 200],#, 300
     'criterion': ['gini', 'entropy'],
-    'max_depth': [None, 5, 10],
+    'max_depth': [5, 10],#None, 
     'min_samples_split': [2, 5, 10],
-    'min_samples_leaf': [1, 2, 4],
+    'min_samples_leaf': [2, 4],
     'max_features': ['auto', 'sqrt', 'log2'],
     'bootstrap': [True, False],
-    'random_state': [None, 42]
+    'random_state': [None]#, 42
 }, defaultCrossValidationNum),
 
     # GaussianNB
-    modelEvaluator('GaussianNB', GaussianNB, {}, defaultCrossValidationNum),
+    modelEvaluator('GaussianNB', GaussianNB, trainTestXY_,{}, defaultCrossValidationNum),
     
     # GradientBoostingClassifier
-    modelEvaluator('GradientBoostingClassifier', GradientBoostingClassifier, {
+    modelEvaluator('GradientBoostingClassifier', GradientBoostingClassifier, trainTestXY_,{
     'loss': ['log_loss', 'exponential'],
-    'learning_rate': [0.1, 0.01, 0.001],
-    'n_estimators': [100, 200, 500],
-    'subsample': [0.5, 0.7, 1.0],
-    'max_depth': [3, 5, None],
-    'min_samples_split': [2, 5, 10],
-    'min_samples_leaf': [1, 2, 4],
-    'max_features': ['sqrt', 'log2', None],
-    'random_state': [None, 42]
+    'learning_rate': [0.01, 0.05],
+    'n_estimators': [100],
+    'subsample': [0.5, 0.8],
+    'max_depth': [5, None],
+    'min_samples_split': [5, 10],
+    'min_samples_leaf': [4],
+    'max_features': ['sqrt', 'log2'],
+    'random_state': [None]#, 42
 }, defaultCrossValidationNum),
 
-    # HistGradientBoostingClassifier
-    modelEvaluator('HistGradientBoostingClassifier', HistGradientBoostingClassifier, {
+    # # HistGradientBoostingClassifier
+    modelEvaluator('HistGradientBoostingClassifier', HistGradientBoostingClassifier, trainTestXY_,{
     'loss': ['binary_crossentropy', 'log_loss'],
-    'learning_rate': [0.1, 0.01, 0.001],
-    'max_iter': [100, 200, 500],
-    'max_depth': [3, 5, None],
-    'min_samples_leaf': [1, 2, 4],
-    'max_bins': [64, 128, 255],
-    'l2_regularization': [0.0, 0.1, 0.01],
-    'early_stopping': [True, 'auto'],
-    'random_state': [None, 42]
+    'learning_rate': [0.01, 0.05],
+    'max_iter': [100, 200],
+    'max_depth': [5, None],
+    'min_samples_leaf': [4],
+    'max_bins': [64, 255],
+    'l2_regularization': [0.0, 0.05],
+    'early_stopping': [True],#, 'auto'
+    'random_state': [None]#, 42
 }, defaultCrossValidationNum),
 
     # KNeighborsClassifier
-    modelEvaluator('KNeighborsClassifier', KNeighborsClassifier, {
+    modelEvaluator('KNeighborsClassifier', KNeighborsClassifier, trainTestXY_,{
     'n_neighbors': [3, 5, 10],
     'weights': ['uniform', 'distance'],
     'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
@@ -206,18 +216,18 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
 
     # LabelPropagation
-    modelEvaluator('LabelPropagation', LabelPropagation, {
+    modelEvaluator('LabelPropagation', LabelPropagation, trainTestXY_,{
     'kernel': ['knn', 'rbf'],
-    'gamma': [None, 0.1, 1.0],
+    'gamma': [0.1, 1.0],
     'n_neighbors': [3, 5, 10],
     'max_iter': [100, 200, 500],
     'tol': [1e-3, 1e-4],
 }, defaultCrossValidationNum),
 
     # LabelSpreading
-    modelEvaluator('LabelSpreading', LabelSpreading, {
+    modelEvaluator('LabelSpreading', LabelSpreading, trainTestXY_,{
     'kernel': ['knn', 'rbf'],
-    'gamma': ['auto', 0.1, 1.0],
+    'gamma': [0.1, 1.0],
     'n_neighbors': [3, 5, 10],
     'alpha': [0.2, 0.5, 0.8],
     'max_iter': [100, 200, 500],
@@ -226,7 +236,7 @@ allModelConfigs = [
     
     
     # LinearDiscriminantAnalysis
-    modelEvaluator('LinearDiscriminantAnalysis', LinearDiscriminantAnalysis, {
+    modelEvaluator('LinearDiscriminantAnalysis', LinearDiscriminantAnalysis, trainTestXY_,{
     'solver': ['lsqr', 'eigen'],
     'shrinkage': ['auto'],
     'priors': [None, [0.1, 0.9], [0.3, 0.7]],
@@ -235,7 +245,7 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     # LinearSVC
-    modelEvaluator('LinearSVC', LinearSVC, {
+    modelEvaluator('LinearSVC', LinearSVC, trainTestXY_,{
     'penalty': ['l2'],
     'loss': ['hinge', 'squared_hinge'],
     'dual': [True, False],
@@ -249,8 +259,8 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     # LogisticRegressionCV
-    modelEvaluator('LogisticRegressionCV', LogisticRegressionCV, {
-    'Cs': [10, 1, 0.1],
+    modelEvaluator('LogisticRegressionCV', LogisticRegressionCV, trainTestXY_,{
+    'Cs': [10, 1],
     'fit_intercept': [True, False],
     'cv': [3, 5],
     'penalty': ['l2', 'l1'],
@@ -261,7 +271,7 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     # MLPClassifier
-    modelEvaluator('MLPClassifier', MLPClassifier, {
+    modelEvaluator('MLPClassifier', MLPClassifier, trainTestXY_,{
     'hidden_layer_sizes': [(100,), (50, 50), (50, 50, 50)],
     'activation': ['relu', 'logistic'],
     'solver': ['adam'],
@@ -275,34 +285,34 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     # MultinomialNB
-    modelEvaluator('MultinomialNB', MultinomialNB, {
+    modelEvaluator('MultinomialNB', MultinomialNB, trainTestXY_,{
     'alpha': [0.1, 0.5, 1.0, 10.0],
 }, defaultCrossValidationNum),
     
     # NearestCentroid
-    modelEvaluator('NearestCentroid', NearestCentroid, {
+    modelEvaluator('NearestCentroid', NearestCentroid, trainTestXY_,{
     'metric': ['euclidean', 'manhattan', 'cosine'],
 }, defaultCrossValidationNum),
     
     
     # OneVsOneClassifier
-    modelEvaluator('OneVsOneClassifier', OneVsOneClassifier, {
+    modelEvaluator('OneVsOneClassifier', OneVsOneClassifier, trainTestXY_,{
     'estimator': [RandomForestClassifier()],
 }, defaultCrossValidationNum),
 
     # OneVsRestClassifier
-    modelEvaluator('OneVsRestClassifier', OneVsRestClassifier, {
+    modelEvaluator('OneVsRestClassifier', OneVsRestClassifier, trainTestXY_,{
     'estimator': [RandomForestClassifier()],
 }, defaultCrossValidationNum),
     
     # OutputCodeClassifier
-    modelEvaluator('OutputCodeClassifier', OutputCodeClassifier, {
+    modelEvaluator('OutputCodeClassifier', OutputCodeClassifier, trainTestXY_,{
     'estimator': [RandomForestClassifier()],
     'code_size': [0.5, 1.0, 1.5],  # Example values for the 'code_size' hyperparameter
 }, defaultCrossValidationNum),
     
     # PassiveAggressiveClassifier
-    modelEvaluator('PassiveAggressiveClassifier', PassiveAggressiveClassifier, {
+    modelEvaluator('PassiveAggressiveClassifier', PassiveAggressiveClassifier, trainTestXY_,{
     'C': [0.1, 1.0, 10.0],  # Regularization parameter
     'fit_intercept': [True, False],  # Whether to include an intercept term
     'max_iter': [1000, 2000, 3000],  # Maximum number of iterations
@@ -312,7 +322,7 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     # Perceptron
-    modelEvaluator('Perceptron', Perceptron, {
+    modelEvaluator('Perceptron', Perceptron, trainTestXY_,{
     'alpha': [0.0001, 0.001, 0.01],  # Regularization strength
     'fit_intercept': [True, False],  # Whether to include an intercept term
     'max_iter': [1000, 2000, 3000],  # Maximum number of iterations
@@ -322,7 +332,7 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     # QuadraticDiscriminantAnalysis
-    modelEvaluator('QuadraticDiscriminantAnalysis', QuadraticDiscriminantAnalysis, {
+    modelEvaluator('QuadraticDiscriminantAnalysis', QuadraticDiscriminantAnalysis, trainTestXY_,{
     'priors': [None, [0.25, 0.75], [0.5, 0.5]],  # Class priors
     'reg_param': [0.0, 0.1, 0.2],  # Regularization parameter
     'store_covariance': [True, False],  # Whether to store covariance matrices
@@ -330,7 +340,7 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     # RadiusNeighborsClassifier
-    modelEvaluator('RadiusNeighborsClassifier', RadiusNeighborsClassifier, {
+    modelEvaluator('RadiusNeighborsClassifier', RadiusNeighborsClassifier, trainTestXY_,{
     'radius': [1.0, 1.5, 2.0],  # Radius of the neighborhood
     'weights': ['uniform', 'distance'],  # Weight function used in prediction
     'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],  # Algorithm used for nearest neighbors search
@@ -340,7 +350,7 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     # RidgeClassifier
-    modelEvaluator('RidgeClassifier', RidgeClassifier, {
+    modelEvaluator('RidgeClassifier', RidgeClassifier, trainTestXY_,{
     'alpha': [1.0, 0.5, 0.1],  # Regularization strength
     'fit_intercept': [True, False],  # Whether to fit an intercept term
     'solver': ['auto', 'svd', 'cholesky', 'lsqr', 'sparse_cg', 'sag', 'saga'],  # Solver for optimization problem
@@ -349,7 +359,7 @@ allModelConfigs = [
 }, defaultCrossValidationNum),
     
     # RidgeClassifierCV
-    modelEvaluator('RidgeClassifierCV', RidgeClassifierCV, {
+    modelEvaluator('RidgeClassifierCV', RidgeClassifierCV, trainTestXY_,{
     'alphas': [[0.1, 1.0, 10.0]],  # List of alpha values to try
     'fit_intercept': [True, False],  # Whether to fit an intercept term
     'scoring': ['accuracy', 'f1_macro'],  # Scoring metric for cross-validation
@@ -358,33 +368,27 @@ allModelConfigs = [
     'store_cv_values': [False, True],  # Whether to store the cross-validation values for each alpha
 }, defaultCrossValidationNum),
     
-    # SGDClassifier
-    modelEvaluator('SGDClassifier', SGDClassifier, {
+#     # SGDClassifier
+    modelEvaluator('SGDClassifier', SGDClassifier, trainTestXY_,{
     'loss': ['hinge', 'log', 'modified_huber', 'squared_hinge', 'perceptron'],  # Loss function
     'penalty': ['l2', 'l1', 'elasticnet'],  # Regularization type
-    'alpha': [0.0001, 0.001, 0.01, 0.1],  # Regularization parameter
-    'l1_ratio': [0.15, 0.25, 0.5, 0.75],  # L1 ratio for elastic net regularization
-    'fit_intercept': [True, False],  # Whether to fit an intercept term
-    'max_iter': [1000, 2000, 5000],  # Maximum number of iterations
-    'tol': [1e-3, 1e-4, 1e-5],  # Tolerance for stopping criterion
-    'shuffle': [True, False],  # Whether to shuffle the training data in each epoch
-    'eta0': [0.01, 0.1, 1.0],  # Initial learning rate
+    'alpha': [0.01, 0.05],  # Regularization parameter
+    'eta0': [0.01, 0.1],  # Initial learning rate
     'learning_rate': ['constant', 'optimal', 'invscaling'],  # Learning rate schedule
     'class_weight': [None, 'balanced'],  # Weights associated with classes
     'average': [False, True],  # Whether to compute the averaged SGD weights
 }, defaultCrossValidationNum),
     
-    # SVC
-    modelEvaluator('SVC', SVC, {
-    'C': [0.1, 1.0, 10.0],  # Penalty parameter C of the error term
+#     # SVC
+    modelEvaluator('SVC', SVC, trainTestXY_,{
+    'C': [0.1, 1.0],#, 10.0  # Penalty parameter C of the error term
     'kernel': ['linear', 'poly', 'rbf', 'sigmoid'],  # Kernel function
-    'degree': [2, 3, 4],  # Degree of the polynomial kernel function
+    'degree': [2, 3],  # Degree of the polynomial kernel function
     'gamma': ['scale', 'auto'],  # Kernel coefficient for 'rbf', 'poly', and 'sigmoid' kernels
-    'coef0': [0.0, 0.5, 1.0],  # Independent term in kernel function
+    'coef0': [0.0, 0.5],#, 1.0  # Independent term in kernel function
     'shrinking': [True, False],  # Whether to use the shrinking heuristic
     'probability': [False, True],  # Whether to enable probability estimates
-    'tol': [1e-3, 1e-4, 1e-5],  # Tolerance for stopping criterion
-    'cache_size': [200, 500, 1000],  # Size of the kernel cache in MB
+    'tol': [1e-3, 1e-4], #, 1e-5 # Tolerance for stopping criterion
     'class_weight': [None, 'balanced'],  # Weights associated with classes
     'max_iter': [-1],  # Maximum number of iterations (-1 for no limit)
 }, defaultCrossValidationNum),

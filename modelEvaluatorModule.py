@@ -35,9 +35,10 @@ class predictedY:
 
 
 class modelEvaluator:
-    def __init__(self, name, modelFunc, hyperParamRanges, crossValidationNum):
+    def __init__(self, name, modelFunc, data, hyperParamRanges, crossValidationNum):
         self.name = name
         self.modelFunc = modelFunc
+        self.data = data
         self.hyperParamRanges = hyperParamRanges
         self.crossValidationNum = crossValidationNum
         self.crossVal = self.crossValidationNum >= 2
@@ -56,7 +57,8 @@ class modelEvaluator:
         if self.crossVal:
             self.colsOrder.extend(['trainAccuracy', 'trainPrecision', 'trainRecall', 'trainF1', 'trainRocauc', 'trainCohenkappascore'])
 
-    def getInputArgs(self, data,totResultsDf=None, paramCheckMode=envVars['paramCheckMode']):
+    def getInputArgs(self, totResultsDf=None, paramCheckMode=envVars['paramCheckMode']):
+        #kkk may shrink trainIndex, testIndex which are list of (indexes)integers to ranges and numbers with a func and a func to get back
         if paramCheckMode:
             if self.hyperParamRanges:
                 for key, value in self.hyperParamRanges.items():
@@ -67,7 +69,6 @@ class modelEvaluator:
                 self.crossValidationNum = 2
                 self.stratifiedKFold = StratifiedKFold(n_splits=self.crossValidationNum) if self.crossValidationNum>1 else None        
         
-        resultsDf = pd.DataFrame()
         inputArgs=[]
         
         #kkk separate the paramCheckMode, hyperParamRanges, totResultsDf.empty to their own funcs
@@ -78,36 +79,36 @@ class modelEvaluator:
                 model = self.modelFunc(**hyperparameters)
                 
                 if self.crossVal:
-                    for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)):
-                        inputArgs.append([fold+1, data, model, hyperparameters, trainIndex, testIndex])
+                    for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(self.data.xTrain, self.data.yTrain)):
+                        inputArgs.append([fold+1, model, hyperparameters, trainIndex, testIndex])
                 else:
-                    inputArgs.append(['noCrossVal', data, model, hyperparameters, list(range(len(data.xTrain))), []])
+                    inputArgs.append(['noCrossVal', model, hyperparameters, list(range(len(self.data.xTrain))), []])
         else:
             model = self.modelFunc()
             if self.crossVal:
-                for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(data.xTrain, data.yTrain)):
-                    inputArgs.append([fold+1, data, model, '', trainIndex, testIndex])
+                for fold, (trainIndex, testIndex) in enumerate(self.stratifiedKFold.split(self.data.xTrain, self.data.yTrain)):
+                    inputArgs.append([fold+1, model, '', trainIndex, testIndex])
             else:
-                inputArgs.append(['noCrossVal', data, model, '', list(range(len(data.xTrain))), []])
+                inputArgs.append(['noCrossVal', model, '', list(range(len(self.data.xTrain))), []])
         
         # check if the inputArgs are not in the totResultsDf
         if not totResultsDf.empty:
+            thisModelTotResultsDf=totResultsDf[(totResultsDf['model'] == self.name)]
             for irI in range(len(inputArgs)-1,-1,-1):
                 ir=inputArgs[irI]
-                if not totResultsDf[(totResultsDf['model'] == self.name) & (totResultsDf['Parameter Set'] == str(ir[3]))
-                    & (totResultsDf['Fold'] == ir[0])].empty:
+                if not thisModelTotResultsDf[(thisModelTotResultsDf['Parameter Set'] == str(ir[3])) & (thisModelTotResultsDf['Fold'] == ir[0])].empty:
                     inputArgs.remove(ir)
-        return [[self,*ir] for ir in inputArgs]
-    def processFold(self, fold, data, model, hyperparameters, trainIndex, testIndex):
+        return [self,inputArgs]
+    def fitModelAndGetResults(self, fold, model, hyperparameters, trainIndex, testIndex):
         try:
-            q('processFold',fold, self.name, hyperparameters,ti(),filewrite=True)
-            foldXTrain, foldXTest = data.xTrain[trainIndex], data.xTrain[testIndex]
-            foldYTrain, foldYTest = data.yTrain[trainIndex], data.yTrain[testIndex]
+            q('fitModelAndGetResults',fold, self.name, hyperparameters,ti(),filewrite=True)
+            foldXTrain, foldXTest = self.data.xTrain[trainIndex], self.data.xTrain[testIndex]
+            foldYTrain, foldYTest = self.data.yTrain[trainIndex], self.data.yTrain[testIndex]
     
             fitted_model = model.fit(foldXTrain, foldYTrain.ravel())
             scores = {'model': self.name, 'Parameter Set': str(hyperparameters), 'Fold': fold}
     
-            predicteds = [predictedY('test', fitted_model.predict(data.xTest), data.yTest)]
+            predicteds = [predictedY('test', fitted_model.predict(self.data.xTest), self.data.yTest)]
             if self.crossVal:
                 predicteds.append(predictedY('train', fitted_model.predict(foldXTest), foldYTest))
             
@@ -117,5 +118,5 @@ class modelEvaluator:
             dfRow = pd.DataFrame(scores, index=[0])[self.colsOrder]
             return dfRow
         except Exception as e:
-            q('processFold Errrrrrr',fold, self.name, hyperparameters,'time:',ti(),'\nerrrr:',e,'\ntraceback:',traceback.format_exc(),'\n',filewrite=True,filename='processFoldErrr')
+            q('fitModelAndGetResults Errrrrrr',fold, self.name, hyperparameters,'time:',ti(),'\nerrrr:',e,'\ntraceback:',traceback.format_exc(),'\n',filewrite=True,filename='fitModelAndGetResultsErrr')
             return pd.DataFrame()

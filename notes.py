@@ -35,10 +35,10 @@ steps to do:
             #done add other models like lgbm+hyperparams
             #done do minimal model for hyperparams check and revise hyperparams
             #done check if some model has lots of errors
-            add confusion matrices
-            add drawing of AUC-ROC Curve
+            add confusion matrices for best algorithm
+            add drawing of AUC-ROC Curve for best algorithm
             add comments
-            separate the modelEval for a single model and (xFold data) now its named processFold but rename it and make it better
+            separate the modelEval for a single model and (xFold data) now its named fitModelAndGetResults but rename it and make it better
             #kkk add subSteps later
         
         explain output data:
