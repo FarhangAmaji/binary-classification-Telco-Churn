@@ -54,7 +54,7 @@ def inputTimeout(prompt, timeout=30):
 
     # Check if input was received or timeout occurred
     if thread.is_alive():
-        print("No input received. Continuing the code...")
-        return None
+        # print("No input received. Continuing the code...")
+        return False
     else:
         return user_input[0]

@@ -5,7 +5,6 @@ os.chdir(baseFolder)
 import itertools
 
 import pandas as pd
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score,cohen_kappa_score
 from sklearn.model_selection import StratifiedKFold
 from utils import q,ti
 from envVarsPreprocess import envVars
@@ -43,14 +42,7 @@ class modelEvaluator:
         self.crossValidationNum = crossValidationNum
         self.crossVal = self.crossValidationNum >= 2
         self.stratifiedKFold = StratifiedKFold(n_splits=crossValidationNum) if crossValidationNum>1 else None
-        self.scoring = {
-            'accuracy': accuracy_score,
-            'precision': precision_score,
-            'recall': recall_score,
-            'f1': f1_score,
-            'rocAuc': roc_auc_score,
-            'cohenKappaScore': cohen_kappa_score
-        }
+        self.metrics = envVars["metrics"]
         self.colsOrder = ['model', 'Parameter Set', 'Fold', 'testAccuracy', 'testPrecision', 'testRecall', 
             'testF1', 'testRocauc', 'testCohenkappascore']
         
@@ -126,10 +118,10 @@ class modelEvaluator:
                 predicteds.append(predictedY('train', fitted_model.predict(foldXTest), foldYTest))
             
             for predicted in predicteds:
-                scores.update(predicted.getScores(self.scoring))
+                scores.update(predicted.getScores(self.metrics))
             
             dfRow = pd.DataFrame(scores, index=[0])[self.colsOrder]
             return dfRow
         except Exception as e:
-            q('fitModelAndGetResults Errrrrrr',fold, self.name, hyperparameters,'time:',ti(),'\nerrrr:',e,'\ntraceback:',traceback.format_exc(),'\n',filewrite=True,filename='fitModelAndGetResultsErrr')
+            q('fitModelAndGetResults Errrrrrr',fold, self.name, hyperparameters,'time:',ti(),'\nerrrr:',e,'\ntraceback:',traceback.format_exc(),'\n',noPrint=True,filewrite=True,filename='fitModelAndGetResultsErrr')
             return pd.DataFrame()

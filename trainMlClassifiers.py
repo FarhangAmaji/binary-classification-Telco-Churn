@@ -11,13 +11,14 @@ from envVarsPreprocess import envVars
 from utils import q,ti, inputTimeout
 #%%
 t0=ti()
-# inputTimeout(f'have u checked the envVars.\nenvVars={envVars}',30)#kkk temp off
+inputTimeout(f'have u checked the envVars.\nenvVars={envVars}',30)
 csvFileName=envVars['csvFileName']
 if os.path.exists(f'{csvFileName}.csv'):
     totResultsDf = pd.read_csv(f'{csvFileName}.csv')
     #kkk I can check for the file lock(file being used by other programs) by resaving it
 else:
     totResultsDf = pd.DataFrame()
+#%%
 modelsAndTheirInputArgsPool=[]
 if __name__ == '__main__':
     for m1 in allModelConfigs:
@@ -39,8 +40,6 @@ if __name__ == '__main__':
                 totResultsDf = pd.concat([totResultsDf, resultRows]).reset_index(drop=True)
                 totResultsDf.to_csv(f'{csvFileName}.csv', index=False, header=True)
     print('lasted',ti()-t0,'s')
-#%% best model for each score
-
 #%% 
 
 #%% 
