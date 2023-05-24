@@ -1,15 +1,14 @@
+# dropoutNetModule.py
 import torch
 import torch.nn as nn
-import torch.optim as optim
 
 class dropoutNet(nn.Module):
-    def __init__(self, inputSize, outputSize, dropoutRate):
+    def __init__(self, inputSize, outputSize):
         super(dropoutNet, self).__init__()
-        self.dropoutRate = dropoutRate
-        
+
         self.fc1 = nn.Linear(inputSize, 400)
         self.lRelu = nn.LeakyReLU(negative_slope=0.05)
-        self.dropout = nn.Dropout(p=self.dropoutRate)
+        self.dropout = nn.Dropout()
         self.fc2 = nn.Linear(400, 400)
         self.fc3 = nn.Linear(400, outputSize)
         self.sigmoid = nn.Sigmoid()
@@ -25,10 +24,12 @@ class dropoutNet(nn.Module):
         x = self.sigmoid(x)
         return x
 
-    def trainModel(self, trainInputs, trainOutputs, valInputs, valOutputs, criterion, optimizer, numEpochs, batchSize, numSamples, patience, savePath):
+    def trainModel(self, trainInputs, trainOutputs, valInputs, valOutputs, criterion, optimizer, numEpochs, batchSize, numSamples, dropoutRate, patience, savePath):
         self.train()
         bestValAccuracy = 0.0
         counter = 0
+        
+        self.dropout.p = dropoutRate
         
         for epoch in range(numEpochs):
             runningLoss = 0.0
@@ -51,7 +52,7 @@ class dropoutNet(nn.Module):
             print(f"Epoch [{epoch+1}/{numEpochs}], Loss: {epochLoss:.4f}")
             
             with torch.no_grad():
-                valAccuracy = self.evaluateModel(valInputs, valOutputs, numSamples, batchSize)
+                valAccuracy = self.evaluateModel(valInputs, valOutputs, numSamples, batchSize, dropoutRate)
                 
                 if valAccuracy > bestValAccuracy:
                     bestValAccuracy = valAccuracy
@@ -71,8 +72,9 @@ class dropoutNet(nn.Module):
         # Return the best model
         return self
 
-    def evaluateModel(self, inputs, outputs, numSamples, batchSize):
+    def evaluateModel(self, inputs, outputs, numSamples, batchSize, dropoutRate):
         self.eval()
+        self.dropout.p = dropoutRate
         
         with torch.no_grad():
             correct = 0

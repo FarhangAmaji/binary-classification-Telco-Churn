@@ -1,3 +1,4 @@
+# trainAndEvalDropoutNet.py
 #%% imports
 import os
 baseFolder = os.path.dirname(os.path.abspath(__file__))
@@ -15,7 +16,7 @@ torch.manual_seed(42)
 # Define the hyperparameters
 inputSize = trainTestXY_.xTrain.shape[1]
 outputSize = 1#kkk I should reshape the data in datapreparation and check if it would still work on the mlClassifiers
-dropoutRate = 0.8
+dropoutRate = 0.9
 learningRate = 0.0003
 testToValRatio = 3
 testToValCoeff = 1/(testToValRatio + 1)
@@ -24,7 +25,7 @@ numSamples = 200
 batchSize = 64
 
 # Create the model
-model = dropoutNet(inputSize, outputSize, dropoutRate)
+model = dropoutNet(inputSize, outputSize)
 
 # Define the loss function and optimizer
 criterion = torch.nn.BCELoss()
@@ -41,7 +42,7 @@ valOutputs = testOutputs[:int(len(testOutputs)*testToValCoeff)]
 testOutputs = testOutputs[int(len(testOutputs)*testToValCoeff):]
 #%%
 # Train the model
-model = model.trainModel(trainInputs, trainOutputs, valInputs, valOutputs, criterion, optimizer, numEpochs, batchSize, numSamples, patience=7, savePath=r'data\outputs\bestDropoutEnsembleModel')
+model = model.trainModel(trainInputs, trainOutputs, valInputs, valOutputs, criterion, optimizer, numEpochs, batchSize, numSamples, dropoutRate=dropoutRate, patience=7, savePath=r'data\outputs\bestDropoutEnsembleModel')
 #%%
 # Evaluate the model with dropout
-model.evaluateModel(testInputs, testOutputs, numSamples, batchSize)
+model.evaluateModel(testInputs, testOutputs, numSamples, batchSize, dropoutRate=dropoutRate)
