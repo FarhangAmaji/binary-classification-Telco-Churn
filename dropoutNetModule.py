@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.optim as optim
 
 class dropoutNet(nn.Module):
     def __init__(self, inputSize, outputSize, dropoutRate):
@@ -24,30 +25,51 @@ class dropoutNet(nn.Module):
         x = self.sigmoid(x)
         return x
 
-    def trainModel(self, inputs, outputs, criterion, optimizer, numEpochs, batchSize):
+    def trainModel(self, trainInputs, trainOutputs, valInputs, valOutputs, criterion, optimizer, numEpochs, batchSize, numSamples, patience, savePath):
         self.train()
+        bestValAccuracy = 0.0
+        counter = 0
         
         for epoch in range(numEpochs):
             runningLoss = 0.0
             
-            for i in range(0, len(inputs), batchSize):
+            for i in range(0, len(trainInputs), batchSize):
                 optimizer.zero_grad()
                 
-                batchInputs = inputs[i:i+batchSize]
-                batchOutputs = outputs[i:i+batchSize]
+                batchTrainInputs = trainInputs[i:i+batchSize]
+                batchTrainOutputs = trainOutputs[i:i+batchSize]
                 
-                batchOutputsPred = self.forward(batchInputs)
-                loss = criterion(batchOutputsPred, batchOutputs)
+                batchTrainOutputsPred = self.forward(batchTrainInputs)
+                loss = criterion(batchTrainOutputsPred, batchTrainOutputs)
                 
                 loss.backward()
                 optimizer.step()
                 
                 runningLoss += loss.item()
             
-            epochLoss = runningLoss / (len(inputs) / batchSize)
+            epochLoss = runningLoss / (len(trainInputs) / batchSize)
             print(f"Epoch [{epoch+1}/{numEpochs}], Loss: {epochLoss:.4f}")
+            
+            with torch.no_grad():
+                valAccuracy = self.evaluateModel(valInputs, valOutputs, numSamples, batchSize)
+                
+                if valAccuracy > bestValAccuracy:
+                    bestValAccuracy = valAccuracy
+                    counter = 0
+                    torch.save(self.state_dict(), savePath)
+                else:
+                    counter += 1
+                    if counter >= patience:
+                        print(f"Early stopping! in {epoch} epoch")
+                        break
         
         print("Training finished.")
+        
+        # Load the best model
+        self.load_state_dict(torch.load(savePath))
+        
+        # Return the best model
+        return self
 
     def evaluateModel(self, inputs, outputs, numSamples, batchSize):
         self.eval()
@@ -58,11 +80,11 @@ class dropoutNet(nn.Module):
             for i in range(0, len(inputs), batchSize):
                 batchInputs = inputs[i:i+batchSize]
                 batchOutputs = outputs[i:i+batchSize]
-                appliedBatchSize, outputSize=batchOutputs.shape
+                appliedBatchSize, outputSize = batchOutputs.shape
                 
                 batchOutputsPred = torch.zeros((numSamples, appliedBatchSize))
                 
-                batchOutputsPred = torch.stack(tuple(map(lambda x: self.forward(x).squeeze(), [batchInputs] * numSamples))                )
+                batchOutputsPred = torch.stack(tuple(map(lambda x: self.forward(x).squeeze(), [batchInputs] * numSamples)))
                 
                 meanOutput = batchOutputsPred.mean(dim=0)
                 predictions = torch.reshape((meanOutput >= 0.5).float(), (-1, outputSize))
@@ -71,3 +93,5 @@ class dropoutNet(nn.Module):
             
             accuracy = correct / len(inputs)
             print(f"Accuracy: {accuracy:.4f}")
+            
+            return accuracy

@@ -15,11 +15,11 @@ torch.manual_seed(42)
 # Define the hyperparameters
 inputSize = trainTestXY_.xTrain.shape[1]
 outputSize = 1#kkk I should reshape the data in datapreparation and check if it would still work on the mlClassifiers
-dropoutRate = 0.5
+dropoutRate = 0.8
 learningRate = 0.0003
 testToValRatio = 3
 testToValCoeff = 1/(testToValRatio + 1)
-numEpochs = 300#kkk early stopping
+numEpochs = 300
 numSamples = 200
 batchSize = 64
 
@@ -34,9 +34,14 @@ trainInputs = torch.from_numpy(trainTestXY_.xTrain).float()
 trainOutputs = torch.reshape(torch.from_numpy(trainTestXY_.yTrain).float(), (-1, outputSize))
 testInputs = torch.from_numpy(trainTestXY_.xTest).float()
 testOutputs = torch.reshape(torch.from_numpy(trainTestXY_.yTest).float(), (-1, outputSize))
+
+valInputs = testInputs[:int(len(testInputs)*testToValCoeff)]
+testInputs = testInputs[int(len(testInputs)*testToValCoeff):]
+valOutputs = testOutputs[:int(len(testOutputs)*testToValCoeff)]
+testOutputs = testOutputs[int(len(testOutputs)*testToValCoeff):]
 #%%
 # Train the model
-model.trainModel(trainInputs, trainOutputs, criterion, optimizer, numEpochs, batchSize)
+model = model.trainModel(trainInputs, trainOutputs, valInputs, valOutputs, criterion, optimizer, numEpochs, batchSize, numSamples, patience=7, savePath=r'data\outputs\bestDropoutEnsembleModel')
 #%%
 # Evaluate the model with dropout
 model.evaluateModel(testInputs, testOutputs, numSamples, batchSize)
