@@ -12,7 +12,7 @@ from envVarsPreprocess import envVars
 from modelEvaluatorModule import trainTestXY
 #%% load data
 def loadData(baseFolder):
-    filePath = os.path.join(baseFolder, 'WA_Fn-UseC_-Telco-Customer-Churn.csv')
+    filePath = os.path.join(baseFolder, 'data\input\WA_Fn-UseC_-Telco-Customer-Churn.csv')
     telcoChurn = pd.read_csv(filePath)
     return telcoChurn
 #%% sec: correct type of cols + categorical cols
@@ -197,7 +197,7 @@ def dataPreparation(doUpSampling=envVars["upSampling"],criticalOutlierColsForARo
     return telcoChurn, trainTestXY_
 #%% 
 if __name__ == '__main__':
-    telcoChurn, xTrain, xTest , yTrain, yTest = dataPreparation(doUpSampling=False,criticalOutlierColsForARow=1)
+    telcoChurn,trainTestXY_= dataPreparation(doUpSampling=False,criticalOutlierColsForARow=1)
 #%% 
 
 #%% 
