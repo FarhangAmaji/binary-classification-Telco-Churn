@@ -106,7 +106,7 @@ class modelEvaluator:
         return [self, inputArgs]
     def fitModelAndGetResults(self, fold, model, hyperparameters, trainIndex, testIndex):
         try:
-            q('fitModelAndGetResults',fold, self.name, hyperparameters,ti(),filewrite=True)
+            q('fitModelAndGetResults',fold, self.name, hyperparameters,ti(),filewrite=True,filename='logs\logs')
             foldXTrain, foldXTest = self.data.xTrain[trainIndex], self.data.xTrain[testIndex]
             foldYTrain, foldYTest = self.data.yTrain[trainIndex], self.data.yTrain[testIndex]
     
@@ -123,5 +123,5 @@ class modelEvaluator:
             dfRow = pd.DataFrame(scores, index=[0])[self.colsOrder]
             return dfRow
         except Exception as e:
-            q('fitModelAndGetResults Errrrrrr',fold, self.name, hyperparameters,'time:',ti(),'\nerrrr:',e,'\ntraceback:',traceback.format_exc(),'\n',noPrint=True,filewrite=True,filename='fitModelAndGetResultsErrr')
+            q('fitModelAndGetResults Errrrrrr',fold, self.name, hyperparameters,'time:',ti(),'\nerrrr:',e,'\ntraceback:',traceback.format_exc(),'\n',noPrint=True,filewrite=True,filename='logs\fitModelAndGetResultsErrr')
             return pd.DataFrame()

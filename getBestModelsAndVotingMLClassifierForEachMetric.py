@@ -19,7 +19,7 @@ from sklearn.exceptions import ConvergenceWarning
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
 #%%
 def runTrainMLClassifers():
-    inpRes=inputTimeout(f'run train classifers?\n"leave it empty if u dont want"',30)
+    inpRes=inputTimeout('run train classifers?\n"anything would run but leave it empty if u dont want"',30)
     needToRunMLClassifiers=False
     if not inpRes:
         csvFileName=envVars['csvFileName']
@@ -29,6 +29,8 @@ def runTrainMLClassifers():
                 needToRunMLClassifiers=True
         else:
             needToRunMLClassifiers=True
+    else:
+        needToRunMLClassifiers=True
     if needToRunMLClassifiers:
         from trainMlClassifiers import totResultsDf
     return totResultsDf
