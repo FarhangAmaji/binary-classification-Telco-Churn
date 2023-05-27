@@ -4,7 +4,7 @@ import torch.nn as nn
 
 class dropoutNet(nn.Module):
     def __init__(self, inputSize, outputSize):
-        super(dropoutNet, self).__init__()
+        super(dropoutNet, self).__init__()#kkk generalize this model for anns and inner steps like batch operations, earlyStopping and model save, model load
 
         self.fc1 = nn.Linear(inputSize, 4*inputSize)
         self.lRelu = nn.LeakyReLU(negative_slope=0.05)

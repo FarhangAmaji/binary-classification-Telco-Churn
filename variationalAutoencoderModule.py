@@ -2,17 +2,26 @@
 #%% imports
 import torch
 import torch.nn as nn
+import inspect
 #%% Define variational Autoencoder (VAE) architecture
 class variationalEncoder(nn.Module):
-    def __init__(self, inputSize, latentSize):
+    def __init__(self, inputSize, latentDim):
         super(variationalEncoder, self).__init__()
+        self.inputArgs = [inputSize, latentDim]#kkk how to save the model when later I can get the input args 
+        self.latentDim = latentDim
         self.fc1 = nn.Linear(inputSize, 4*inputSize)
         self.fc2 = nn.Linear(4*inputSize, inputSize)
-        self.lRelu = nn.LeakyReLU(negative_slope=0.05)
+        self.lRelu = nn.LeakyReLU(negative_slope=0.05)#kkk activation func shouldnt be linear because we want to more non-linear latentMemory
         self.dropout = nn.Dropout()
-        self.fcMean = nn.Linear(inputSize, latentSize)
-        self.fcLogvar = nn.Linear(inputSize, latentSize)
-
+        self.fcMean = nn.Linear(inputSize, latentDim)
+        self.fcLogvar = nn.Linear(inputSize, latentDim)
+    
+    def reparameterize(self, mean, logvar):
+        std = torch.exp(0.5 * logvar)
+        eps = torch.randn_like(std)
+        z = mean + eps * std
+        return z
+    
     def forward(self, x):
         x = self.fc1(x)
         x = self.lRelu(x)
@@ -22,16 +31,18 @@ class variationalEncoder(nn.Module):
         x = self.dropout(x)
         mean = self.fcMean(x)
         logvar = self.fcLogvar(x)
-        return mean, logvar
+        z = self.reparameterize(mean, logvar)
+        return mean, logvar, z
 
 class variationalDecoder(nn.Module):
-    def __init__(self, latentSize, inputSize):
+    def __init__(self, latentDim, inputSize):
         super(variationalDecoder, self).__init__()
-        self.fc1 = nn.Linear(latentSize, 4*inputSize)
+        self.inputArgs = [latentDim, inputSize]#kkk
+        self.fc1 = nn.Linear(latentDim, 4*inputSize)
         self.fc2 = nn.Linear(4*inputSize, inputSize)
         self.fc3 = nn.Linear(inputSize, inputSize)
         self.fc4 = nn.Linear(inputSize, inputSize)
-        self.lRelu = nn.LeakyReLU(negative_slope=0.05)
+        self.lRelu = nn.LeakyReLU(negative_slope=0.05)#kkk activation func shouldnt be linear because we want to more non-linear latentMemory
         self.dropout = nn.Dropout()
 
     def forward(self, z):
@@ -48,20 +59,14 @@ class variationalDecoder(nn.Module):
         return z
 
 class variationalAutoencoder(nn.Module):
-    def __init__(self, inputSize, latentSize):
+    def __init__(self, inputSize, latentDim):
         super(variationalAutoencoder, self).__init__()
-        self.encoder = variationalEncoder(inputSize, latentSize)
-        self.decoder = variationalDecoder(latentSize, inputSize)
-
-    def reparameterize(self, mean, logvar):
-        std = torch.exp(0.5 * logvar)
-        eps = torch.randn_like(std)
-        z = mean + eps * std
-        return z
+        self.inputArgs = [inputSize, latentDim]#kkk
+        self.encoder = variationalEncoder(inputSize, latentDim)
+        self.decoder = variationalDecoder(latentDim, inputSize)
 
     def forward(self, x):
-        mean, logvar = self.encoder(x)
-        z = self.reparameterize(mean, logvar)
+        mean, logvar, z = self.encoder(x)
         reconstructed = self.decoder(z)
         return reconstructed, mean, logvar
 
@@ -118,8 +123,9 @@ def trainVae(model, trainInputs, trainOutputs, valInputs, valOutputs, criterion,
         
         if valLoss < bestValLoss:
             bestValLoss = valLoss
-            counter = 0
-            torch.save(model.state_dict(), savePath)
+            counter = 0#kkk may add better saver module with all other classes definitions and imports
+            #kkk put class definitions out of loop
+            torch.save({'className':model.__class__.__name__,'classDefinition':inspect.getsource(model.__class__),'inputArgs':model.inputArgs,'model':model.state_dict()}, savePath)
         elif valLoss > bestValLoss:
             counter += 1
             if counter >= patience:
@@ -131,7 +137,8 @@ def trainVae(model, trainInputs, trainOutputs, valInputs, valOutputs, criterion,
     print("Training finished.")
     
     # Load the best model
-    model.load_state_dict(torch.load(savePath))
+    bestModel=torch.load(savePath)
+    model.load_state_dict(bestModel['model'])
     
     # Return the best model
     return model

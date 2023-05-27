@@ -4,7 +4,8 @@ scikit-learn
 matplotlib
 seaborn
 xgboost
-imblearn#kkk would I need it
+imblearn
 lightgbm
+torch
 # category-encoders
 # plotly
