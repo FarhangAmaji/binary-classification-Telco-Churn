@@ -2,10 +2,13 @@
 import os
 baseFolder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(baseFolder)
-import itertools
+import sys
+sys.path.append('..')
 
+import itertools
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
+
 from utils import q,ti
 from envVarsPreprocess import envVars
 import traceback
@@ -92,7 +95,7 @@ class modelEvaluator:
             for irI in range(len(inputArgs) - 1, -1, -1):
                 ir = inputArgs[irI]
                 if not thisModelTotResultsDf[
-                    (thisModelTotResultsDf['Parameter Set'] == str(ir[3])) & (thisModelTotResultsDf['Fold'] == ir[0])].empty:
+                    (thisModelTotResultsDf['Parameter Set'] == str(ir[2])) & (thisModelTotResultsDf['Fold'] == ir[0])].empty:
                     inputArgs.remove(ir)
 
     def getInputArgs(self, totResultsDf=None, paramCheckMode=envVars['paramCheckMode']):

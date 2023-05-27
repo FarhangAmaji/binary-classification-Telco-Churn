@@ -4,12 +4,14 @@ import os
 baseFolder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(baseFolder)
 
-from devideDataToTrainValTest import trainInputs, trainOutputs, valInputs, valOutputs, testInputs, testOutputs
-from variationalAutoencoderModule import variationalAutoencoder
-from binaryClassifierToVariationalAutoencoderModule import binaryClassifierToVariationalAutoencoder, trainBinaryClassifierToVariationalAutoencoder
-from binaryClassifierToVariationalAutoencoderModule import evaluateBinaryClassifierToVariationalAutoencoder
+from deepLearning.variationalAutoencoderModule import variationalAutoencoder
+from deepLearning.binaryClassifierToVariationalAutoencoderModule import binaryClassifierToVariationalAutoencoder, trainBinaryClassifierToVariationalAutoencoder
+from deepLearning.binaryClassifierToVariationalAutoencoderModule import evaluateBinaryClassifierToVariationalAutoencoder
 import torch
 import torch.optim as optim
+from data.devideDataToTrainValTest import trainInputs, trainOutputs, valInputs, valOutputs, testInputs, testOutputs
+os.chdir(baseFolder)
+
 vaeBestModel=torch.load(r'data\outputs\bestVaeModel')
 vae=variationalAutoencoder(*vaeBestModel['inputArgs'])
 vae.load_state_dict(vaeBestModel['model'])

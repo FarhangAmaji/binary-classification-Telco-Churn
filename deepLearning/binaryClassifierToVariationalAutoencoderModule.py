@@ -76,8 +76,7 @@ def trainBinaryClassifierToVariationalAutoencoder(model, trainInputs, trainOutpu
     
             if valAccuracy > bestValAccuracy:
                 bestValAccuracy = valAccuracy
-                counter = 0#kkk may add better saver module with all other classes definitions and imports
-                #kkk put class definitions out of loop
+                counter = 0
                 torch.save({'className':model.__class__.__name__,'classDefinition':inspect.getsource(model.__class__),'inputArgs':model.inputArgs,'model':model.state_dict()}, savePath)
             elif valAccuracy < bestValAccuracy:
                 counter += 1

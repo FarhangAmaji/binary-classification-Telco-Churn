@@ -2,6 +2,8 @@
 import os
 baseFolder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(baseFolder)
+import sys
+sys.path.append('..')
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,10 +11,11 @@ import seaborn as sns
 from sklearn.preprocessing import MinMaxScaler
 
 from envVarsPreprocess import envVars
-from modelEvaluatorModule import trainTestXY
+from machineLearning.modelEvaluatorModule import trainTestXY
 #%% load data
 def loadData(baseFolder):
-    filePath = os.path.join(baseFolder, 'data\input\WA_Fn-UseC_-Telco-Customer-Churn.csv')
+    parentFolder=os.path.dirname(baseFolder)
+    filePath = os.path.join(parentFolder, 'data\input\WA_Fn-UseC_-Telco-Customer-Churn.csv')
     telcoChurn = pd.read_csv(filePath)
     return telcoChurn
 #%% sec: correct type of cols + categorical cols
@@ -68,7 +71,7 @@ def handleCategoricalCols(telcoChurn):
     telcoChurnWithCategoricalCols=telcoChurn.loc[:, categoricalCols]
     telcoChurnWithCategoricalCols=pd.get_dummies(telcoChurnWithCategoricalCols)
 
-    telcoChurnNonCategoricalCols=telcoChurn.loc[:,list(set(telcoChurn.columns) - set(categoricalCols))]#kkk
+    telcoChurnNonCategoricalCols=telcoChurn.loc[:,list(set(telcoChurn.columns) - set(categoricalCols))]
     
     "#ccc here we remove 'gender_Male' from 'telcoChurnWithCategoricalCols' because gender has only 2 categories"
     def delete2ndOptionFor_CategoricalCols2unique_From_telcoChurnWithCategoricalCols(categoricalCols2unique,mainDf,dfWithCategoricalCols):
@@ -94,7 +97,7 @@ def plotBoxplotsForOutliers(numericCols,classOfOutput,df):
         plt.show()
 #%% outliers Checker with Inter Quartile Range (IQR)
 def removeOutliersWithIQR(telcoChurn,numericCols,criticalOutlierColsForARow):
-    #kkk I may add test to check these steps
+    
     from collections import Counter
     outlierList = []
     criticalOutlierColsForARow=1

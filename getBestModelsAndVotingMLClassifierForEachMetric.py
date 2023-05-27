@@ -8,18 +8,17 @@ import matplotlib.pyplot as plt
 baseFolder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(baseFolder)
 
-from allModelImports import *
-from modelConfigs import allModelConfigs, trainTestXY_
+from machineLearning.allModelImports import *
+from machineLearning.modelConfigs import allModelConfigs, trainTestXY_
 from envVarsPreprocess import envVars
 from utils import q, ti, inputTimeout
 import warnings
 from sklearn.exceptions import ConvergenceWarning
 
-# Ignore scikit-learn warnings
-warnings.filterwarnings("ignore", category=ConvergenceWarning)
+os.chdir(baseFolder)
 #%%
 def runTrainMLClassifers():
-    inpRes=inputTimeout('run train classifers?\n"anything would run but leave it empty if u dont want"',30)
+    inpRes=inputTimeout('run train classifers?\n"enter anything to run but leave it empty if u dont want"',30)
     needToRunMLClassifiers=False
     if not inpRes:
         csvFileName=envVars['csvFileName']
@@ -32,11 +31,12 @@ def runTrainMLClassifers():
     else:
         needToRunMLClassifiers=True
     if needToRunMLClassifiers:
-        from trainMlClassifiers import totResultsDf
+        from trainMlClassifiers import trainMLClassifiersFunc
+        totResultsDf = trainMLClassifiersFunc()
+        os.chdir(baseFolder)
     return totResultsDf
 totResultsDf=runTrainMLClassifers()
 #%% best model for each metric on test data
-#kkk for each metric draw confusion matrix and roc
 leastScoresOfEachMetric={'accuracy': .75,
 'precision': .75,
 'recall': .75,
@@ -71,6 +71,9 @@ def getAllBestEstimatorsForMetric(metricName):
             allBestEstimatorsForMetric.append((modelName,modelFuncWithHyperparams))
     return allBestEstimatorsForMetric, bestOfEachModelForMetricDf
 #%% 
+# Ignore scikit-learn warnings
+warnings.filterwarnings("ignore", category=ConvergenceWarning)
+
 allVotingClassifiers={}
 for metricName, metricFunc in envVars['metrics'].items():
     thisVotingClassifier={}

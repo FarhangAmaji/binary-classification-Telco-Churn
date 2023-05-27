@@ -38,5 +38,5 @@ from sklearn.neighbors import RadiusNeighborsClassifier
 from sklearn.linear_model import RidgeClassifier
 from sklearn.linear_model import RidgeClassifierCV
 from sklearn.linear_model import SGDClassifier
-from sklearn.svm import SVC #kkk took so long check it later
+from sklearn.svm import SVC
 from lightgbm import LGBMClassifier

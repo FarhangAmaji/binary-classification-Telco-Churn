@@ -1,18 +1,18 @@
 #%% imports
 import os
-import pandas as pd
 baseFolder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(baseFolder)
-
+import sys
+sys.path.append('..')
+import pandas as pd
 from modelEvaluatorModule import modelEvaluator,trainTestXY
-from dataPreparationModule import dataPreparation
-from envVarsPreprocess import envVars
 from allModelImports import *
+from data.dataPreparationModule import dataPreparation
+from envVarsPreprocess import envVars
 #%% 
 telcoChurn, trainTestXY_ = dataPreparation(criticalOutlierColsForARow=1)
 #%%
-#kkk the data preparation may be moved here
-defaultCrossValidationNum = envVars['crossValNum']#kkk change it back to 5
+defaultCrossValidationNum = envVars['crossValNum']
 allModelConfigs = [
     ## lgbm
     modelEvaluator('LGBMClassifier', LGBMClassifier, trainTestXY_,{

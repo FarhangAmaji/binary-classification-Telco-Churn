@@ -3,7 +3,7 @@ import threading
 
 ti=time.time
 
-def q(*t,typ="a",filewrite="",path="",s="",il="",noPrint=0,filename='plog'):#kkk some options like filename exist in original print#kkk rewrite it
+def q(*t,typ="a",filewrite="",path="",s="",il="",noPrint=0,filename='plog'):
     '''
     Parameters
     ----------

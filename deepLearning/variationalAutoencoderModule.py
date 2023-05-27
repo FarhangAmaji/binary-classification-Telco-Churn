@@ -7,11 +7,11 @@ import inspect
 class variationalEncoder(nn.Module):
     def __init__(self, inputSize, latentDim):
         super(variationalEncoder, self).__init__()
-        self.inputArgs = [inputSize, latentDim]#kkk how to save the model when later I can get the input args 
+        self.inputArgs = [inputSize, latentDim]
         self.latentDim = latentDim
         self.fc1 = nn.Linear(inputSize, 4*inputSize)
         self.fc2 = nn.Linear(4*inputSize, inputSize)
-        self.lRelu = nn.LeakyReLU(negative_slope=0.05)#kkk activation func shouldnt be linear because we want to more non-linear latentMemory
+        self.sigmoid = nn.Sigmoid()
         self.dropout = nn.Dropout()
         self.fcMean = nn.Linear(inputSize, latentDim)
         self.fcLogvar = nn.Linear(inputSize, latentDim)
@@ -24,10 +24,10 @@ class variationalEncoder(nn.Module):
     
     def forward(self, x):
         x = self.fc1(x)
-        x = self.lRelu(x)
+        x = self.sigmoid(x)
         x = self.dropout(x)
         x = self.fc2(x)
-        x = self.lRelu(x)
+        x = self.sigmoid(x)
         x = self.dropout(x)
         mean = self.fcMean(x)
         logvar = self.fcLogvar(x)
@@ -37,31 +37,27 @@ class variationalEncoder(nn.Module):
 class variationalDecoder(nn.Module):
     def __init__(self, latentDim, inputSize):
         super(variationalDecoder, self).__init__()
-        self.inputArgs = [latentDim, inputSize]#kkk
+        self.inputArgs = [latentDim, inputSize]
         self.fc1 = nn.Linear(latentDim, 4*inputSize)
         self.fc2 = nn.Linear(4*inputSize, inputSize)
         self.fc3 = nn.Linear(inputSize, inputSize)
-        self.fc4 = nn.Linear(inputSize, inputSize)
-        self.lRelu = nn.LeakyReLU(negative_slope=0.05)#kkk activation func shouldnt be linear because we want to more non-linear latentMemory
+        self.sigmoid = nn.Sigmoid()
         self.dropout = nn.Dropout()
 
     def forward(self, z):
         z = self.fc1(z)
-        z = self.lRelu(z)
+        z = self.sigmoid(z)
         z = self.dropout(z)
         z = self.fc2(z)
-        z = self.lRelu(z)
+        z = self.sigmoid(z)
         z = self.dropout(z)
         z = self.fc3(z)
-        z = self.lRelu(z)
-        z = self.dropout(z)
-        z = self.fc4(z)
         return z
 
 class variationalAutoencoder(nn.Module):
     def __init__(self, inputSize, latentDim):
         super(variationalAutoencoder, self).__init__()
-        self.inputArgs = [inputSize, latentDim]#kkk
+        self.inputArgs = [inputSize, latentDim]
         self.encoder = variationalEncoder(inputSize, latentDim)
         self.decoder = variationalDecoder(latentDim, inputSize)
 
@@ -71,7 +67,7 @@ class variationalAutoencoder(nn.Module):
         return reconstructed, mean, logvar
 
 # Define KL divergence loss
-def klDivergenceLoss(mean, logvar):#kkk logvar and mean give error
+def klDivergenceLoss(mean, logvar):
     klLoss = -0.5 * torch.sum(1 + logvar - mean.pow(2) - logvar.exp())
     return klLoss
 
@@ -123,8 +119,7 @@ def trainVae(model, trainInputs, trainOutputs, valInputs, valOutputs, criterion,
         
         if valLoss < bestValLoss:
             bestValLoss = valLoss
-            counter = 0#kkk may add better saver module with all other classes definitions and imports
-            #kkk put class definitions out of loop
+            counter = 0
             torch.save({'className':model.__class__.__name__,'classDefinition':inspect.getsource(model.__class__),'inputArgs':model.inputArgs,'model':model.state_dict()}, savePath)
         elif valLoss > bestValLoss:
             counter += 1
@@ -150,7 +145,7 @@ def evaluateVae(model, inputs, outputs, criterion, batchSize, device):
     with torch.no_grad():
         for i in range(0, inputs.shape[0], batchSize):
             # Extract batch inputs and outputs
-            batchInputs = inputs[i:i+batchSize].to(device)#kkk add device
+            batchInputs = inputs[i:i+batchSize].to(device)
 
             # Forward pass
             reconstructed, mean, logvar = model(batchInputs)

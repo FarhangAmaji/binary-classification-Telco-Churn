@@ -6,9 +6,9 @@ os.chdir(baseFolder)
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from variationalAutoencoderModule import variationalAutoencoder, trainVae, evaluateVae
-#%%
-from devideDataToTrainValTest import trainInputs, trainOutputs, valInputs, valOutputs, testInputs, testOutputs
+from deepLearning.variationalAutoencoderModule import variationalAutoencoder, trainVae, evaluateVae
+from data.devideDataToTrainValTest import trainInputs, trainOutputs, valInputs, valOutputs, testInputs, testOutputs
+os.chdir(baseFolder)
 #%% 
 # Set random seed for reproducibility
 torch.manual_seed(42)
@@ -38,7 +38,7 @@ numEpochs = 300
 vae=trainVae(vae, trainInputs, trainOutputs, valInputs, valOutputs, reconstructionLoss, vaeOptimizer, numEpochs,
              batchSize, dropoutRate, device, patience=10, savePath=r'data\outputs\bestVaeModel')
 #%%
-from variationalAutoencoderModule import variationalAutoencoder, trainVae, evaluateVae
+from deepLearning.variationalAutoencoderModule import variationalAutoencoder, trainVae, evaluateVae
 vaeBestModel=torch.load(r'data\outputs\bestVaeModel')
 vae=variationalAutoencoder(*vaeBestModel['inputArgs'])
 vae.load_state_dict(vaeBestModel['model'])

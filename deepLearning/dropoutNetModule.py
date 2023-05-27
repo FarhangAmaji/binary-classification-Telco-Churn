@@ -4,13 +4,13 @@ import torch.nn as nn
 
 class dropoutNet(nn.Module):
     def __init__(self, inputSize, outputSize):
-        super(dropoutNet, self).__init__()#kkk generalize this model for anns and inner steps like batch operations, earlyStopping and model save, model load
+        super(dropoutNet, self).__init__()
 
         self.fc1 = nn.Linear(inputSize, 4*inputSize)
         self.lRelu = nn.LeakyReLU(negative_slope=0.05)
         self.dropout = nn.Dropout()
         self.fc2 = nn.Linear(4*inputSize, 4*inputSize)
-        self.fc3 = nn.Linear(4*inputSize, inputSize)
+        self.fc3 = nn.Linear(4*inputSize, outputSize)
         self.sigmoid = nn.Sigmoid()
         
     def forward(self, x):
@@ -24,7 +24,7 @@ class dropoutNet(nn.Module):
         x = self.sigmoid(x)
         return x
 
-def trainModel(model, trainInputs, trainOutputs, valInputs, valOutputs, criterion, optimizer, numEpochs, batchSize, numSamples, dropoutRate, patience, savePath):
+def trainModel(model, trainInputs, trainOutputs, valInputs, valOutputs, criterion, optimizer, numEpochs, batchSize, numSamples, dropoutRate, device, patience, savePath):
     model.train()
     bestValAccuracy = 0.0
     counter = 0
@@ -55,7 +55,7 @@ def trainModel(model, trainInputs, trainOutputs, valInputs, valOutputs, criterio
         print(f"Epoch [{epoch+1}/{numEpochs}], Loss: {epochLoss:.4f}")
         
         with torch.no_grad():
-            valAccuracy = evaluateModel(valInputs, valOutputs, numSamples, batchSize, dropoutRate)
+            valAccuracy = evaluateModel(model, valInputs, valOutputs, numSamples, batchSize, device, dropoutRate)
             
             if valAccuracy > bestValAccuracy:
                 bestValAccuracy = valAccuracy
@@ -77,7 +77,7 @@ def trainModel(model, trainInputs, trainOutputs, valInputs, valOutputs, criterio
     # Return the best model
     return model
 
-def evaluateModel(model, inputs, outputs, numSamples, batchSize, dropoutRate):
+def evaluateModel(model, inputs, outputs, numSamples, batchSize, device, dropoutRate):
     model.eval()
     model.dropout.p = dropoutRate
     
@@ -85,11 +85,11 @@ def evaluateModel(model, inputs, outputs, numSamples, batchSize, dropoutRate):
         correct = 0
         
         for i in range(0, len(inputs), batchSize):
-            batchInputs = inputs[i:i+batchSize]
-            batchOutputs = outputs[i:i+batchSize]
+            batchInputs = inputs[i:i+batchSize].to(device)
+            batchOutputs = outputs[i:i+batchSize].to(device)
             appliedBatchSize, outputSize = batchOutputs.shape
             
-            batchOutputsPred = torch.zeros((numSamples, appliedBatchSize))
+            batchOutputsPred = torch.zeros((numSamples, appliedBatchSize)).to(device)
             
             batchOutputsPred = torch.stack(tuple(map(lambda x: model.forward(x).squeeze(), [batchInputs] * numSamples)))
             

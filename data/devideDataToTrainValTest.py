@@ -3,9 +3,11 @@
 import os
 baseFolder = os.path.dirname(os.path.abspath(__file__))
 os.chdir(baseFolder)
-from dataPreparationModule import dataPreparation
+import sys
+sys.path.append('..')
+from data.dataPreparationModule import dataPreparation
 import torch
-
+#%%
 telcoChurn,trainTestXY_ = dataPreparation(criticalOutlierColsForARow=1)
 
 outputSize = 1#kkk I should reshape the data in datapreparation and check if it would still work on the mlClassifiers
